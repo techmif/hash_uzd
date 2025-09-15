@@ -2,7 +2,7 @@ Ideja tokia:
 Irasyti trumpa audio (pvz „sitas hash algoritmas bus nepalauziamas“)
 Ta audio (mp3 faila) paimti kaip string
 Ivedima nuskaityti kaip nors kartu su raidziu skaitinem reiksmem. Galbut konvertavimo budu (pvz a=32 ar panasiai)
-Pagal ivedima padaryti funkcija, kuri nueitu i kokia nors vieta mp3 faile (tam tikra const skaiciu simboliu - tusti simboliai butu irgi xorinami? galbut)
+Pagal ivedima (ivestu raidziu sk suma) padaryti funkcija, kuri nueitu i kokia nors vieta mp3 faile (tam tikra const skaiciu simboliu - tusti simboliai butu irgi xorinami? galbut)
 Tada ivedima visa xorinti su jam atitinkama vieta
 paxorinta reiksme konvertuoti i x16 sk sistema -> gautas hash
 
