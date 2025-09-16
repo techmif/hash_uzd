@@ -17,7 +17,7 @@ Dominykas Pronskus atliko dalį su AI pagalba
    Konvertavau tekstą (pasinaudodamas konvertavimo įrankiu per google) į binary formato tekstą. Po to konvertavau atgal į unicode ir pabandžiau paleisti failą.  
    Failas veikė, vadinasi galima rašyti funkciją, kuri nuskaitytų tekstą iš failo.  
    Jei būtų neveikęs konvertavimas, būtų tekę imtis paprastesnio sprendimo, kuris neturi utf koduotės.
-5. pakeičiau projekto parametrus: padariau, kad įvestis ir išvestis veiktų su utf8 koduote (čia dar nepadariau iš tikro)
+5. padariau, kad nuskaitomas failas būtų iškart dekoduojamas į binariąją seką.
 6. parašiau nuskaitymo iš mp3 funkciją (čia dar nepadariau iš tikro)
 7. parašiau paskirstymo pagal vartotojo įvedimą funkciją (čia dar nepadariau iš tikro)
 8. parašiau hash funkciją. Tai yra xor ir kovertavimą į x16 sistemą. (čia dar nepadariau iš tikro)
