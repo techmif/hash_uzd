@@ -1,23 +1,12 @@
 #include "lib.hpp"
 
-void CharIBinary(string input){
+void KonvertCharIx10 (string input){
     char simbolis;
     for(int i=0; i<=input.length(); i++)
     {
-        simbolis = input[i];
-        cout<< simbolis << " ";
-        cout<< bitset<8>(simbolis) << " ";
-    }
-    cout<<endl;
-}
-
-void KonvertCharIAscii (string input){
-    char simbolis;
-    for(int i=0; i<=input.length(); i++)
-    {
-        simbolis = input[i];
-        cout<< simbolis << " ";
-        cout<< (int)simbolis << " ";
+        simbolis = input[i]; //null patampa 0, o 0 yra 48
+        //cout<< simbolis << " ";
+        //cout<< (int)simbolis << " ";
     }
     cout<<endl;
 }
@@ -32,8 +21,10 @@ void nuskaitytimp3(vector<int> &nuskaityti_binary_duomenys){
     {
         cout<<"nuskaitoma is failo.";
         for(char byte; in.get(byte);){
-            nuskaityti_binary_duomenys.push_back((unsigned char)byte);
+            nuskaityti_binary_duomenys.push_back((unsigned char)byte); //nors duomenys nuskaitomi binary, kai char irasome i int vektoriu, jis konvertuojamas i desimtaine sistema
+            if (nuskaityti_binary_duomenys.size() % 90000 == 0) cout<<".";
         }
+        cout<<endl<<"Nuskaityta sekmingai."<<endl;
     }
     in.close();
 }
@@ -41,14 +32,15 @@ void nuskaitytimp3(vector<int> &nuskaityti_binary_duomenys){
 int main (){
     vector<int> nuskaityti_binary_duomenys;
 
-    /* cout << "Iveskite zodi, kuri norite uzkoduoti: " <<endl;
+    cout << "Iveskite zodi, kuri norite uzkoduoti: " <<endl;
     string input;
     cin >> input;
     cout<< input<<endl;
-    KonvertCharIAscii(input);
-    CharIBinary(input); */
+    KonvertCharIx10(input);
     nuskaitytimp3(nuskaityti_binary_duomenys);
-    cout<<"Pirmi trys simboliai: "<< nuskaityti_binary_duomenys[2]<<" "<<nuskaityti_binary_duomenys[3]<<" "<<nuskaityti_binary_duomenys[4]<<endl;
-    cout<<"Vektoriaus dydis: "<<nuskaityti_binary_duomenys.size()<<endl;
+
+    //testavimui naudotos eilutes
+    //cout<<"Pirmi trys simboliai: "<< nuskaityti_binary_duomenys[2]<<" "<<nuskaityti_binary_duomenys[3]<<" "<<nuskaityti_binary_duomenys[4]<<endl;
+    //cout<<"Vektoriaus dydis: "<<nuskaityti_binary_duomenys.size()<<endl; //turi buti 102295
     return 0;
 }
