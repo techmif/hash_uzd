@@ -28,8 +28,9 @@ void nuskaitytimp3(vector<int> &nuskaityti_binary_duomenys){
     else 
     {
         //cout<<"nuskaitoma is failo.";
-        for(char byte; in.get(byte);){
-            nuskaityti_binary_duomenys.push_back((unsigned char)byte); //nors duomenys nuskaitomi binary, kai char irasome i int vektoriu, jis konvertuojamas i desimtaine sistema
+        for(char byte; in.get(byte);)
+        {
+            if(byte != '\0') nuskaityti_binary_duomenys.push_back((unsigned char)byte); //nors duomenys nuskaitomi binary, kai char irasome i int vektoriu, jis konvertuojamas i desimtaine sistema
             //if (nuskaityti_binary_duomenys.size() % 50000 == 0) cout<<"."; //skaitant ilgesni faila rodys kad vyksta procesas
         }
         //cout<<endl<<"Nuskaityta sekmingai."<<endl;
@@ -96,7 +97,7 @@ int main (){
 
     //testavimui naudotos eilutes
     //cout<<"Visu simboliu desimtaine suma: "<<suma<<endl;
-    //cout<<"Vektoriaus dydis: "<<nuskaityti_binary_duomenys.size()<<endl; //turi buti 102295
+    cout<<"Vektoriaus dydis: "<<nuskaityti_binary_duomenys.size()<<endl; //turi buti 102295
     //cout<<"Vektoriaus dydis: "<<konvertuota_ivestis.size()<<endl;
 
     //hash debugginimui (kad tikrai butu 64 simboliai)
