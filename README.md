@@ -18,6 +18,9 @@ Dominykas Pronskus atliko dalį su AI pagalba
    Failas veikė, vadinasi galima rašyti funkciją, kuri nuskaitytų tekstą iš failo.  
    Jei būtų neveikęs konvertavimas, būtų tekę imtis paprastesnio sprendimo, kuris neturi utf koduotės.
 5. padariau, kad nuskaitomas failas būtų iškart dekoduojamas į binariąją seką.
-6. parašiau nuskaitymo iš mp3 funkciją (čia dar nepadariau iš tikro)
-7. parašiau paskirstymo pagal vartotojo įvedimą funkciją (čia dar nepadariau iš tikro)
-8. parašiau hash funkciją. Tai yra xor ir kovertavimą į x16 sistemą. (čia dar nepadariau iš tikro)
+6. parašiau nuskaitymo iš mp3 funkciją.
+7. parašiau vartotojo įvedimo funkciją, kuri prideda „mini saltingą“ (taip vadinu, nes visiems pridedamas vienodas).
+8. parašiau paskirstymo pagal vartotojo įvedimą funkciją. (įvedimo dešimtainės ascii vertės susumuojamos ir xor metu kreipiasi į nuskaitytą ir paskirstytą mp3 vektorių)
+9. parašiau hash funkciją. Tai yra xor ir kovertavimą į x16 sistemą.
+10. padariau, kad hash visada būtų 64 simbolių ilgio. Per trumpi hash prideda tiek kiek trūkstą papildomų simbolių iš įvesties iš naujo, xorinama su kita mp3 vieta nei iš pradžių.
+11. padariau collision handling (šiuo metu 123________ ir 222________ skiriasi tik pirmi 3 simboliai.) (dar nepadariau šito).
