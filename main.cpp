@@ -9,7 +9,12 @@ void hashFunkcija(vector<int> &nuskaityti_binary_duomenys, vector<int> &konvertu
     {
         hash += desimtaine_i_16(konvertuota_ivestis[i] ^ nuskaityti_binary_duomenys[pradinis_skyrius * 32 + i]);
     }
-    if(hash.length()<64) hash = hash += desimtaine_i_16(konvertuota_ivestis[1] ^ nuskaityti_binary_duomenys[pradinis_skyrius * (32 + 1)]);
+    int i=0;
+    while (hash.length()<64) 
+    {
+        hash += desimtaine_i_16(konvertuota_ivestis[i] ^ nuskaityti_binary_duomenys[pradinis_skyrius * (32 + i)]); //pradedam kaskart is skirtingo skyriaus
+        i++;
+    }
     if(hash.length()>64) hash = hash.substr(0,64); //kad butu tik 64 simboliai
     //cout<<"Pirmi trys simboliai: "<< nuskaityti_binary_duomenys[pradinis_skyrius*32]<<" "<<nuskaityti_binary_duomenys[pradinis_skyrius*32+1]<<" "<<nuskaityti_binary_duomenys[pradinis_skyrius*32+2]<<endl;
 }
@@ -76,6 +81,11 @@ int main (){
             //cout<<input<<endl;
             break;
         }
+        else if (input.length() >= 32)
+        {
+            input = input;
+            break;
+        }
     }
 
     KonvertCharIx10(input, konvertuota_ivestis);
@@ -103,3 +113,4 @@ int main (){
 
 //problemos:
 //siuo metu gaunasi kad ivedus nedidelius zodzius, labai nemazas sansas gauti beveik ta pati hash 123________ ir pvz 222________ turi tas pacias desimtainiu reiksmiu sumas
+//hashas nesigauna visada 64 simboliu ilgio. Kartais gaunasi maziau
