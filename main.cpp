@@ -9,6 +9,8 @@ void hashFunkcija(vector<int> &nuskaityti_binary_duomenys, vector<int> &konvertu
     {
         hash += desimtaine_i_16(konvertuota_ivestis[i] ^ nuskaityti_binary_duomenys[pradinis_skyrius * 32 + i]);
     }
+    if(hash.length()<64) hash = hash += desimtaine_i_16(konvertuota_ivestis[1] ^ nuskaityti_binary_duomenys[pradinis_skyrius * (32 + 1)]);
+    if(hash.length()>64) hash = hash.substr(0,64); //kad butu tik 64 simboliai
     //cout<<"Pirmi trys simboliai: "<< nuskaityti_binary_duomenys[pradinis_skyrius*32]<<" "<<nuskaityti_binary_duomenys[pradinis_skyrius*32+1]<<" "<<nuskaityti_binary_duomenys[pradinis_skyrius*32+2]<<endl;
 }
 
@@ -88,13 +90,13 @@ int main (){
     //cout<<"Vektoriaus dydis: "<<konvertuota_ivestis.size()<<endl;
 
     //hash debugginimui (kad tikrai butu 64 simboliai)
-    /*
+    
     for(int i=1; i<=hash.length(); i++) 
     {
         cout<< hash[i-1];
         if(i%8==0) cout<<endl;
     } 
-    */
+    
     return 0;
 }
 
