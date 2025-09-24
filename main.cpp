@@ -1,18 +1,18 @@
 #include "lib.hpp"
 
-void hashFunkcija(vector<int> &nuskaityti_binary_duomenys, vector<int> &konvertuota_ivestis, int suma, string &hash){
+void hashFunkcija(vector<int> &nuskaityti_binary_duomenys, vector<int> &konvertuota_ivestis, int suma, string &hash, vector<int> &konvertuota_druskyte){
     int skyriu_sk = nuskaityti_binary_duomenys.size() / 32; //dalinu ne is 64 todel, kad kiekvienas sombolis uzims 2 baitus 16 sistemoje
     int pradinis_skyrius = suma;
     if (pradinis_skyrius > skyriu_sk) pradinis_skyrius -= skyriu_sk; //darau antra rata, jei zodis ivestas per ilgas
     //cout<<"Pradinis skyrius: "<<pradinis_skyrius<<endl; //turi buti = suma
     for(int i=0; i<32; i++)
     {
-        hash += desimtaine_i_16(konvertuota_ivestis[i] ^ nuskaityti_binary_duomenys[pradinis_skyrius * 32 + i]);
+        hash += desimtaine_i_16(konvertuota_ivestis[i] ^ nuskaityti_binary_duomenys[pradinis_skyrius * 32 + i] ^ konvertuota_druskyte[i]);
     }
     int i=0;
     while (hash.length()<64) 
     {
-        hash += desimtaine_i_16(konvertuota_ivestis[i] ^ nuskaityti_binary_duomenys[pradinis_skyrius * (32 + i)]); //pradedam kaskart is skirtingo skyriaus
+        hash += desimtaine_i_16(konvertuota_ivestis[i] ^ nuskaityti_binary_duomenys[pradinis_skyrius * (32 + i)] ^ konvertuota_druskyte[i]); //pradedam kaskart is skirtingo skyriaus
         i++;
     }
     if(hash.length()>64) hash = hash.substr(0,64); //kad butu tik 64 simboliai
@@ -59,55 +59,97 @@ int Sumax10(vector<int> &konvertuota_ivestis){ //apskaiciuosime visu ivestu simb
     return suma;
 }
 
+void failo_nuskaitymas(int &pasirinkimas, vector<string> &txtsarasas, string &input){
+    cout<<"Pasirinkite faila, is kurio norite nuskaityti duomenis: "<<endl;
+    txtfailai(".",txtsarasas);
+    int i;
+    for(i=0; i<txtsarasas.size(); i++)
+    {
+        cout<<i+1<<" - "<<txtsarasas[i]<<endl;
+    }
+    cout<<"Pasirinkite ivesdami skaiciu: ";
+    int temp;
+    cin>>temp;
+
+    ifstream fr(txtsarasas[temp-1]);
+    if (fr) {
+        string line;
+        while (getline(fr, line)) {
+            input += line;
+            input += '\n';
+        }
+    }
+    cout<<input.size()<<endl;
+    fr.close();
+}
+
 int main (){
     vector<int> nuskaityti_binary_duomenys; //jie saugomi desimtainiu formatu, pavadinti taip tik del nuskaitymo budo
     vector<int> konvertuota_ivestis; //vartotojo ivedamas string ir paverstas i desimtaini vektoriu
+    vector<int> konvertuota_druskyte;
     string hash;
+    string salt;
     int suma;
     string input;
 
-    while (true)
-    {
+    cout<<"Kaip norėsite vykdyti programą?: "<<endl;
+    cout<<"1 - slaptazodzio ivedimas ranka." <<endl;
+    cout<<"2 - nuskaitymas is failo." <<endl;
+    cout<<"3 - testavimas." <<endl;
+    cout<<"Pasirinkite ivesdami skaiciu: ";
+    string temp;
+    cin>>temp;
+
+    if (temp=="1"){
         cout << "Iveskite zodi, kuri norite uzkoduoti: " <<endl;
         cin >> input;
-        if(input.length()<=0) input.clear(); //kad butu ivestas bent vienas simbolis
-        else if (input.length() < 32) //pridedama dalele druskos (siuo atveju visiems slaptazodziams vienoda), kad slaptazodis butu pilnesnis.
-        {
-            int kiekTruksta = 32 - input.length();
-            string papildymas = "AsEsuMiFakultetoAntrakursisStud"; //31 simbolio uzpildymas
-            for (int i=0; i<=kiekTruksta; i++) 
-            {
-                input += papildymas[i]; //uzpildau iki 32 simboliu, kad butu galima panaudoti visa mp3 faila
-            }
-            //cout<<input<<endl;
-            break;
-        }
-        else if (input.length() >= 32)
-        {
-            input = input;
-            break;
-        }
     }
 
+    else if(temp=="2"){
+        vector<string> txtsarasas;
+        int failo_pasirinkimas;
+        failo_nuskaitymas(failo_pasirinkimas, txtsarasas, input);
+    }
+
+    else if(temp=="3"){
+
+    }
+    else return 0;
+
+    //pagrindinis ciklas
+    salt = druskyte(input);
     KonvertCharIx10(input, konvertuota_ivestis);
+    KonvertCharIx10(salt, konvertuota_druskyte);
     suma = Sumax10(konvertuota_ivestis);
     nuskaitytimp3(nuskaityti_binary_duomenys);
-    hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash);
-    cout<<"Sugeneruotas hash: "<<hash<<endl;
+    hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
+
+    cout<<"Koki rezultata norite matyti?"<<endl;
+    cout<<"1 - tik sugeneruota hash"<<endl;
+    cout<<"2 - sugeneruotus hash ir salt"<<endl;
+    temp="";
+    if(temp=="1"){
+        cout<<"Sugeneruotas hash: "<<hash<<endl;
+    }
+    else {
+        cout<<"Sugeneruotas hash: "<<hash<<endl;
+        cout<<"Sugeneruotas salt: "<<salt<<endl;
+    }
 
     //testavimui naudotos eilutes
     //cout<<"Visu simboliu desimtaine suma: "<<suma<<endl;
-    cout<<"Vektoriaus dydis: "<<nuskaityti_binary_duomenys.size()<<endl; //turi buti 102295
+    //cout<<"Vektoriaus dydis: "<<nuskaityti_binary_duomenys.size()<<endl; //turi buti 102295
     //cout<<"Vektoriaus dydis: "<<konvertuota_ivestis.size()<<endl;
 
     //hash debugginimui (kad tikrai butu 64 simboliai)
-    
+    /*
     for(int i=1; i<=hash.length(); i++) 
     {
         cout<< hash[i-1];
         if(i%8==0) cout<<endl;
-    } 
-    
+    }
+    */
+   
     return 0;
 }
 
