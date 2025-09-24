@@ -127,7 +127,8 @@ int main (){
     cout<<"Koki rezultata norite matyti?"<<endl;
     cout<<"1 - tik sugeneruota hash"<<endl;
     cout<<"2 - sugeneruotus hash ir salt"<<endl;
-    temp="";
+    temp.clear();
+    cin>>temp;
     if(temp=="1"){
         cout<<"Sugeneruotas hash: "<<hash<<endl;
     }
@@ -149,7 +150,7 @@ int main (){
         if(i%8==0) cout<<endl;
     }
     */
-   
+
     return 0;
 }
 
