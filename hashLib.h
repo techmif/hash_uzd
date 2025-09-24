@@ -9,6 +9,9 @@
 #include <sstream>
 #include <filesystem>
 #include <numeric>
+#include <cstdint>
+#include <utility>
+#include <algorithm>
 
 using std::cout;
 using std::cin;

@@ -12,19 +12,21 @@ int main()
 		cout << "3 - Testine aplinka\n";
 		cout << end << " - Baigti darba\n";
 		cout << "------------------------------------------------------------------------\n";
-		int menuPasirinkimas = ivestiesPatikrinimas(1, end, end);
+		int menuPasirinkimas; // = ivestiesPatikrinimas(1, end, end);
+
+		cin >> menuPasirinkimas;
 
 		if (menuPasirinkimas == end) { break; }
 
 		switch (menuPasirinkimas) {
 		case 1:
-			hashManual;
+			hashManual();
 			break;
 		case 2:
-			hashFile;
+			hashFile();
 			break;
 		case 3:
-			hashTest;
+			hashTest();
 			break;
 		default:
 			cout << "Klaida pasirenkant meniu punkta. Bandykite is naujo.\n";
