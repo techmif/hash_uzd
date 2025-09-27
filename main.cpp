@@ -92,6 +92,10 @@ void clearData(string &input, string &hash, string &salt, int &suma, vector<int>
     konvertuota_druskyte.clear();
 }
 
+void kolizijuanalize(){
+    
+}
+
 int main (){
     vector<int> nuskaityti_binary_duomenys; //jie saugomi desimtainiu formatu, pavadinti taip tik del nuskaitymo budo
     vector<int> konvertuota_ivestis; //vartotojo ivedamas string ir paverstas i desimtaini vektoriu
@@ -157,7 +161,7 @@ int main (){
                 hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
                 if(i%10000==0) cout<<".";
                 if(i==50000) cout<<"pusiaukele..";
-                out1<<input<<" "<<hash<<endl;
+                out2<<input<<" "<<hash<<endl;
                 clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte); //isvalom kintamuosius
             }
             cout<<endl;
@@ -174,7 +178,7 @@ int main (){
                 hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
                 if(i%5000==0) cout<<".";
                 if(i==50000) cout<<"pusiaukele..";
-                out1<<input<<" "<<hash<<endl;
+                out3<<input<<" "<<hash<<endl;
                 clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte); //isvalom kintamuosius
             }
             cout<<endl;
@@ -191,11 +195,13 @@ int main (){
                 hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
                 if(i%5000==0) cout<<".";
                 if(i==50000) cout<<"pusiaukele..";
-                out1<<input<<" "<<hash<<endl;
+                out4<<input<<" "<<hash<<endl;
                 clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte); //isvalom kintamuosius
             }
             cout<<endl;
             out4.close();
+
+            kolizijuanalize();
         }
         else if (temp=="2"){
 
