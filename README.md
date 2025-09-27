@@ -5,6 +5,25 @@ Darbą atlikome poroje.
 Marijus Kuprys atliko dalį be AI pagalbos (pasiskirstėme rolėmis mesdami monetą)  
 Dominykas Pronskus atliko dalį su AI pagalba  
 
+# __Testavimo rezultatai__ #
+## 1 testas ##
+Testo tikslas - kolizijų atsparumo analizė.  
+Šiame teste sugeneravau 4 failus po 100,000 atsitiktine tvarka sugeneruotų slaptažodžių ir kiekvienam iš jų sukūriau po hash.  
+output1.txt - 100,000 atsitiktine tvarka sugeneruotų slaptažodžių, kuriuos sudaro tik 10 simbolių.  
+output2.txt - toks pats kiekis, sudarytas iš 100 simbolių.  
+output3.txt - toks pats kiekis, sudarytas iš 500 simbolių slaptažodžių.  
+output4.txt - toks pats kiekis slaptažodžių, sudarytų iš 1000 simbolių.  
+
+REZULTATAI:
+| Testo numeris | kolizijų sk. | failai, kuriuose kolizijos aptiktos | nuotrauka | komentaras |
+| ------------- | ------------ | ----------------------------------- | --------- | ---------- |
+|1|5|output2.txt x2, output3.txt x2, output4.txt x1| <img width="130" height="54" alt="Screenshot 2025-09-27 172428" src="https://github.com/user-attachments/assets/80184e01-7dd4-4f2c-8f32-9aeb0cd21def" /> | visos kolizijos turi tuos pačius slaptažodžius, po testo pakeičiau kodą, kad tokių neskaičiuotų |
+|2|0|||
+|3||||
+|4||||
+|5||||
+|vidurkis||||
+
 # __Užduoties atlikimo procesas__ #
 ## užduotis be DI pagalbos ##
 1. apsirašiau idėją, sukūriau ideja.txt
