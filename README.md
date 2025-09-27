@@ -23,4 +23,6 @@ Dominykas Pronskus atliko dalį su AI pagalba
 8. parašiau paskirstymo pagal vartotojo įvedimą funkciją. (įvedimo dešimtainės ascii vertės susumuojamos ir xor metu kreipiasi į nuskaitytą ir paskirstytą mp3 vektorių)
 9. parašiau hash funkciją. Tai yra xor ir kovertavimą į x16 sistemą.
 10. padariau, kad hash visada būtų 64 simbolių ilgio. Per trumpi hash prideda tiek kiek trūkstą papildomų simbolių iš įvesties iš naujo, xorinama su kita mp3 vieta nei iš pradžių.
-11. padariau collision handling (šiuo metu 123________ ir 222________ skiriasi tik pirmi 3 simboliai.) (dar nepadariau šito).
+11. padariau collision handling (šiuo metu 123________ ir 222________ skiriasi tik pirmi 3 simboliai.).
+12. pakeičiau mini saltingą į normalų salting su seed-based random generavimu.
+13. sukūriau testinius failus ir testines funkcijas. Testavimo rezultatus aprašiau žemiau.
