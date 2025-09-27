@@ -92,8 +92,52 @@ void clearData(string &input, string &hash, string &salt, int &suma, vector<int>
     konvertuota_druskyte.clear();
 }
 
-void kolizijuanalize(){
-    
+void kolizijuanalize() { //parase chatgpt, nes as buvau sugalvojes prastesni metoda.
+    // This function analyzes collisions in hash outputs from files "output1.txt" to "output4.txt"
+    // If a collision is found, it prints the file name, line numbers, and contents of both collided lines
+    ofstream analize("analize.txt");
+    int total_collisions = 0;
+    for (int i = 0; i < 4; i++) {
+        cout<<"analizuojamas "<<i+1<<" failas"<<endl;
+        std::ifstream in("output" + std::to_string(i + 1) + ".txt");
+        if (!in) {
+            std::cout << "Nepavyko atidaryti failo: output" << std::to_string(i + 1) << ".txt" << std::endl;
+            continue;
+        }
+
+        std::unordered_map<std::string, std::vector<std::pair<int, std::string>>> hash_lines;
+        std::string line;
+        int line_number = 0;
+        while (std::getline(in, line)) {
+            line_number++;
+            std::istringstream iss(line);
+            std::string password, hash;
+            iss >> password >> hash;
+            if (hash.length() == 64) {
+                hash_lines[hash].emplace_back(line_number, line);
+            }
+        }
+        in.close();
+
+        for (const auto& pair : hash_lines) {
+            // Use a set to check for unique lines
+            std::unordered_set<std::string> unique_lines; 
+            for (const auto& item : pair.second) {
+                unique_lines.insert(item.second);
+            }
+            if (unique_lines.size() > 1) {
+                total_collisions++;
+                analize << "Kolizija faile output" << std::to_string(i + 1) << ".txt:" << std::endl;
+                for (const auto& item : pair.second) {
+                    analize << "Eilute: " << item.first << " | Turinys: " << item.second << std::endl;
+                }
+                analize << std::endl;
+            }
+        }
+    }
+    analize.close();
+    cout<<"analize baigta"<<endl;
+    cout<<"Is viso koliziju: "<<total_collisions<<endl;
 }
 
 int main (){

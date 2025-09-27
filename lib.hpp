@@ -4,6 +4,9 @@
 #include <bitset>
 #include <fstream>
 #include <random>
+#include <sstream>//gpt
+#include <unordered_map>//gpt
+#include <unordered_set>
 
 #ifdef _WIN32
 #include <windows.h>
