@@ -18,6 +18,7 @@ using std::endl;
 using std::bitset;
 using std::ios;
 using std::ifstream;
+using std::ofstream;
 using std::vector;
 
 string desimtaine_i_16(int desimtaine){
@@ -48,8 +49,7 @@ string druskyte (string input){
     return result;
 }
 
-void txtfailai(const string &path, vector<string> &fileList) // Funkcija rasiau praeitam semestre
-{
+void txtfailai(const string &path, vector<string> &fileList){ // Funkcija rasiau praeitam semestre
     int i = 0;
     #ifdef _WIN32
     WIN32_FIND_DATAA findFileData;
@@ -90,4 +90,45 @@ void txtfailai(const string &path, vector<string> &fileList) // Funkcija rasiau 
 
     closedir(dir);
 #endif
+}
+
+string randSgen(string input, int size) { //sugeneruota su ai, nes nesigilinu i random bibliotekas
+    static string similarStr; // Keeps the "panasus" string between calls
+
+    std::random_device rd;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<int> dist(0, 61); // 0-9, A-Z, a-z
+
+    auto randomChar = [&]() -> char {
+        int val = dist(rng);
+        if (val < 10) return '0' + val;
+        else if (val < 36) return 'A' + (val - 10);
+        else return 'a' + (val - 36);
+    };
+
+    if (input == "random") {
+        string result;
+        for (int i = 0; i < size; ++i) {
+            result += randomChar();
+        }
+        return result;
+    } 
+    else if (input == "panasus") {
+        if (similarStr.empty() || similarStr.size() != size) {
+            similarStr.clear();
+            for (int i = 0; i < size; ++i) {
+                similarStr += randomChar();
+            }
+        }
+        // Change one random symbol
+        std::uniform_int_distribution<int> idxDist(0, size - 1);
+        int idx = idxDist(rng);
+        char newChar;
+        do {
+            newChar = randomChar();
+        } while (newChar == similarStr[idx]);
+        similarStr[idx] = newChar;
+        return similarStr;
+    }
+    return "";
 }
