@@ -3,12 +3,13 @@
 void hashFunkcija(vector<int> &nuskaityti_binary_duomenys, vector<int> &konvertuota_ivestis, int suma, string &hash, vector<int> &konvertuota_druskyte){
     int skyriu_sk = nuskaityti_binary_duomenys.size() / 32; //dalinu ne is 64 todel, kad kiekvienas sombolis uzims 2 baitus 16 sistemoje
     int pradinis_skyrius = suma;
-    if (pradinis_skyrius > skyriu_sk) pradinis_skyrius -= skyriu_sk; //darau antra rata, jei zodis ivestas per ilgas
+    while (pradinis_skyrius > skyriu_sk) pradinis_skyrius -= skyriu_sk; //darau antra rata, jei zodis ivestas per ilgas
     //cout<<"Pradinis skyrius: "<<pradinis_skyrius<<endl; //turi buti = suma
     for(int i=0; i<32; i++)
     {
         hash += desimtaine_i_16(konvertuota_ivestis[i] ^ nuskaityti_binary_duomenys[pradinis_skyrius * 32 + i] ^ konvertuota_druskyte[i]);
     }
+    //cout<<"pirmas ciklas sekmingas"<<endl;
     int i=0;
     while (hash.length()<64) 
     {
@@ -47,7 +48,6 @@ void KonvertCharIx10 (string input, vector<int> &konvertuota_ivestis){
         //cout<< (int)simbolis << " ";
         konvertuota_ivestis.push_back((int)simbolis);
     }
-    cout<<endl;
 }
 
 int Sumax10(vector<int> &konvertuota_ivestis){ //apskaiciuosime visu ivestu simboliu desimtaine suma, kuria naudosime kreipiantis i mp3 suskirstyta veiktoriu
@@ -79,7 +79,7 @@ void failo_nuskaitymas(int &pasirinkimas, vector<string> &txtsarasas, string &in
             input += '\n';
         }
     }
-    cout<<input.size()<<endl;
+    //cout<<input.size()<<endl;
     fr.close();
 }
 
@@ -113,16 +113,30 @@ int main (){
 
     else if(temp=="3"){
 
+
+        salt = druskyte(input);
+        KonvertCharIx10(input, konvertuota_ivestis);
+        KonvertCharIx10(salt, konvertuota_druskyte);
+        suma = Sumax10(konvertuota_ivestis);
+        nuskaitytimp3(nuskaityti_binary_duomenys);
+        hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
+        return 0;
     }
     else return 0;
 
     //pagrindinis ciklas
     salt = druskyte(input);
+    //cout<<"Druska sukurta sekmingai"<<endl;
     KonvertCharIx10(input, konvertuota_ivestis);
+    //cout<<"1 konvertavimas sekmingas"<<endl;
     KonvertCharIx10(salt, konvertuota_druskyte);
+    //cout<<"2 konvertavimas sekmingas"<<endl;
     suma = Sumax10(konvertuota_ivestis);
+    //cout<<"suma sekminga"<<endl;
     nuskaitytimp3(nuskaityti_binary_duomenys);
+    //cout<<"mp3 nuskaitymas sekmingas"<<endl;
     hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
+    //cout<<"hash padarytas sekmingai"<<endl;
 
     cout<<"Koki rezultata norite matyti?"<<endl;
     cout<<"1 - tik sugeneruota hash"<<endl;
