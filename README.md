@@ -17,12 +17,12 @@ output4.txt - toks pats kiekis slaptažodžių, sudarytų iš 1000 simbolių.
 REZULTATAI:
 | Testo numeris | kolizijų sk. | failai, kuriuose kolizijos aptiktos | nuotrauka | komentaras |
 | ------------- | ------------ | ----------------------------------- | --------- | ---------- |
-|1|5|output2.txt x2, output3.txt x2, output4.txt x1| <img width="130" height="54" alt="Screenshot 2025-09-27 172428" src="https://github.com/user-attachments/assets/80184e01-7dd4-4f2c-8f32-9aeb0cd21def" /> | visos kolizijos turi tuos pačius slaptažodžius, po testo pakeičiau kodą, kad tokių neskaičiuotų |
-|2|0|||
-|3||||
-|4||||
-|5||||
-|vidurkis||||
+|1|0 (5)|output2.txt x2, output3.txt x2, output4.txt x1| <img width="130" height="54" alt="Screenshot 2025-09-27 172428" src="https://github.com/user-attachments/assets/80184e01-7dd4-4f2c-8f32-9aeb0cd21def" /> | visos kolizijos turi tuos pačius slaptažodžius, tad jų negalime skaičiuoti kaip kolizijų. Po testo pakeičiau kodą, kad tokių neskaičiuotų |
+|2|0||<img width="102" height="76" alt="image" src="https://github.com/user-attachments/assets/146d9601-4db5-40d3-8f59-2626da8a95f3" />|pakeitus kodą nebeliko kolizijų|
+|3|0||<img width="102" height="76" alt="image" src="https://github.com/user-attachments/assets/f7487588-733b-476f-bd2a-1652f67230be" />||
+|4|0||<img width="102" height="76" alt="image" src="https://github.com/user-attachments/assets/f2e9413f-5982-43ae-8877-d699c802a8eb" />||
+|5|0||<img width="101" height="75" alt="image" src="https://github.com/user-attachments/assets/17ead738-34df-4926-9c28-83f8d196eba5" />||
+|vidurkis|0|||tikrųjų kolizijų per visus 5 bandymus nebuvo|
 
 # __Užduoties atlikimo procesas__ #
 ## užduotis be DI pagalbos ##
