@@ -7,6 +7,7 @@
 #include <sstream>//gpt
 #include <unordered_map>//gpt
 #include <unordered_set>
+#include <climits>
 
 #ifdef _WIN32
 #include <windows.h>
