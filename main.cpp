@@ -176,79 +176,31 @@ int main (){
         cout<<"3 - konstitucijos testai"<<endl;
         cin>>temp;
         if(temp=="1"){
+            string pobudis="random";
+            int hash_dydziai[4] = {10,100,500,10000};
             nuskaitytimp3(nuskaityti_binary_duomenys);
             cout<<"kuriami 100 000 string, 10 simboliu dydzio."<<endl;
-            ofstream out1("output1.txt");
-            for(int i=0;i<100000;i++){
-                input = randSgen("random",10); //visiskai atsitiktiniu 10 skirtingu simboliu string.
-                salt = druskyte(input);
-                KonvertCharIx10(input, konvertuota_ivestis);
-                KonvertCharIx10(salt, konvertuota_druskyte);
-                suma = Sumax10(konvertuota_ivestis);
-                hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
-                if(i%10000==0) cout<<".";
-                if(i==50000) cout<<"pusiaukele..";
-                out1<<input<<" "<<hash<<endl;
-                clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte); //isvalom kintamuosius
+            for(int i=0;i<4;i++){
+                ofstream out("output" + std::to_string(i+1) + ".txt");
+                for(int j=0;j<100000;j++){
+                    input = randSgen(pobudis,hash_dydziai[i]); //visiskai atsitiktiniu 10 skirtingu simboliu string.
+                    salt = druskyte(input);
+                    KonvertCharIx10(input, konvertuota_ivestis);
+                    KonvertCharIx10(salt, konvertuota_druskyte);
+                    suma = Sumax10(konvertuota_ivestis);
+                    hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
+                    if(j%10000==0) cout<<".";
+                    if(j==50000) cout<<"pusiaukele..";
+                    out<<input<<" "<<hash<<endl;
+                    clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte); //isvalom kintamuosius
+                }
+                cout<<endl;
+                out.close();
             }
-            cout<<endl;
-            out1.close();
-
-            cout<<"kuriami 100 000 string, 100 simboliu dydzio."<<endl;
-            ofstream out2("output2.txt");
-            for(int i=0;i<100000;i++){
-                input = randSgen("random",100);
-                salt = druskyte(input);
-                KonvertCharIx10(input, konvertuota_ivestis);
-                KonvertCharIx10(salt, konvertuota_druskyte);
-                suma = Sumax10(konvertuota_ivestis);
-                hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
-                if(i%10000==0) cout<<".";
-                if(i==50000) cout<<"pusiaukele..";
-                out2<<input<<" "<<hash<<endl;
-                clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte); //isvalom kintamuosius
-            }
-            cout<<endl;
-            out2.close();
-
-            cout<<"kuriami 100 000 string, 500 simboliu dydzio."<<endl;
-            ofstream out3("output3.txt");
-            for(int i=0;i<100000;i++){
-                input = randSgen("random",500);
-                salt = druskyte(input);
-                KonvertCharIx10(input, konvertuota_ivestis);
-                KonvertCharIx10(salt, konvertuota_druskyte);
-                suma = Sumax10(konvertuota_ivestis);
-                hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
-                if(i%5000==0) cout<<".";
-                if(i==50000) cout<<"pusiaukele..";
-                out3<<input<<" "<<hash<<endl;
-                clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte); //isvalom kintamuosius
-            }
-            cout<<endl;
-            out3.close();
-
-            cout<<"kuriami 100 000 string, 1000 simboliu dydzio."<<endl;
-            ofstream out4("output4.txt");
-            for(int i=0;i<100000;i++){
-                input = randSgen("random",1000);
-                salt = druskyte(input);
-                KonvertCharIx10(input, konvertuota_ivestis);
-                KonvertCharIx10(salt, konvertuota_druskyte);
-                suma = Sumax10(konvertuota_ivestis);
-                hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
-                if(i%5000==0) cout<<".";
-                if(i==50000) cout<<"pusiaukele..";
-                out4<<input<<" "<<hash<<endl;
-                clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte); //isvalom kintamuosius
-            }
-            cout<<endl;
-            out4.close();
-
             kolizijuanalize();
         }
         else if (temp=="2"){
-
+            
         }
         else if(temp=="3"){
 
