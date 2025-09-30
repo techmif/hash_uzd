@@ -8,6 +8,8 @@
 #include <unordered_map>//gpt
 #include <unordered_set>
 #include <climits>
+#include <chrono>
+#include <iomanip>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -24,6 +26,24 @@ using std::ios;
 using std::ifstream;
 using std::ofstream;
 using std::vector;
+using std::fixed;
+using std::setprecision;
+
+// Simple timer helpers. Use startTimer() to get a timestamp token and pass it to
+// stopTimerMs() to get elapsed milliseconds as double.
+using timer_point = std::chrono::steady_clock::time_point;
+
+static inline timer_point startTimer() {
+    return std::chrono::steady_clock::now();
+}
+
+// Return elapsed seconds as a double
+static inline double stopTimerSec(const timer_point &start) {
+    auto end = std::chrono::steady_clock::now();
+    std::chrono::duration<double> diff = end - start; // seconds
+    return diff.count();
+}
+
 
 string desimtaine_i_16(int desimtaine){
     string hex = "";
@@ -136,3 +156,4 @@ string randSgen(string input, int size) { //sugeneruota su ai, nes nesigilinu i 
     }
     return "";
 }
+

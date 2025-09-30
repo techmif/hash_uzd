@@ -93,6 +93,24 @@ void clearData(string &input, string &hash, string &salt, int &suma, vector<int>
     konvertuota_druskyte.clear();
 }
 
+static string read_first_n_lines(const string &filepath, int n) { //gpt parase patogesne funkcija nei as. Bet as ja modikavau nemazai
+    string lines;
+    if (n <= 0) return lines;
+    ifstream in(filepath);
+    if (!in) {
+        std::cerr << "Nepavyko atidaryti failo: " << filepath << endl;
+        return lines;
+    }
+    string line;
+    int count = 0;
+    while (count < n && std::getline(in, line)) {
+        lines += line;
+        ++count;
+    }
+    in.close();
+    return lines;
+}
+
 void kolizijuanalize() { //parase chatgpt, nes as buvau sugalvojes prastesni metoda.
     // This function analyzes collisions in hash outputs from files "output1.txt" to "output4.txt"
     // If a collision is found, it prints the file name, line numbers, and contents of both collided lines
@@ -360,7 +378,32 @@ int main (){
             simboliuanalize();
         }
         else if(temp=="3"){
-
+            nuskaitytimp3(nuskaityti_binary_duomenys);
+            int eiluciu_sk[9]={1,2,4,8,16,32,64,128,256};
+            for(int i=0;i<10;i++){
+                timer_point t = startTimer();
+                if(i<9){
+                    cout<<"Pradedamas "<<eiluciu_sk[i]<<" eiluciu nuskaitymas."<<endl;
+                    input = read_first_n_lines("konstitucija.txt", eiluciu_sk[i]);
+                    salt = druskyte(input);
+                    KonvertCharIx10(input, konvertuota_ivestis);
+                    KonvertCharIx10(salt, konvertuota_druskyte);
+                    suma = Sumax10(konvertuota_ivestis);
+                    hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
+                }
+                else {
+                    cout<<"Pradedamas viso failo nuskaitymas."<<endl;
+                    input = read_first_n_lines("konstitucija.txt", INT_MAX); //viso failo nuskaitymas
+                    salt = druskyte(input);
+                    KonvertCharIx10(input, konvertuota_ivestis);
+                    KonvertCharIx10(salt, konvertuota_druskyte);
+                    suma = Sumax10(konvertuota_ivestis);
+                    hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
+                }
+                double laikas = stopTimerSec(t);
+                cout<<"Nuskaitymas ir hash generavimas baigtas, užtrukta laiko: "<<fixed<<setprecision(6)<<laikas<<"s."<<endl;
+                clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte);
+            }
         }
         else return 0;
         return 0;
