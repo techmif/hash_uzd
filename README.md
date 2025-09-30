@@ -34,12 +34,14 @@ Kolizijų failuose aptikta nebuvo.
 Testų rezultatai parodo, kad slaptažodžiai, kurių simbolių kiekis buvo 10, turėjo didžiausią hex lygio hash sutapimą. Kartais simbolio pasikartojimas pozicijoje siekė net 97%.  
 Tačiau tie patys slaptažodžiai turėjo patį mažiausią bitų lygmens hash simbolio pozicijos sutapimą.  
 Lentelėje taip pat pavaizduota pozicija, kurioje buvo daugiausiai pasikartojantis simbolis (visuose 100,000 hash). Pastebime, kad 3 pozicija dažnai pasikartodavo didesnės apimties slaptažodžiuose, tuo tarpu trumpuose slaptažodžiuose daugiausiai kartodavosi tas simbolis, kuris buvo 23 pozicijoje.  
+Taip pat galima pastebėti, kad unikalių simbolių kiekis vidutiniškai didesniuose failuose yra vienodas (15.98). Taip yra dėl to, kad pirmas simbolis (pozicija) šiuose failuose dėl tam tikrų priežasčių panaudoja tik 15 simbolių.  
 
-Tikslesni testavimo rezultatai (visi 5 testai) aprašyti faile 2_testavimas.txt.
+Tikslesni testavimo rezultatai (visi 5 testai) aprašyti faile 2_testavimas.txt.  
+Dar tikslesni testavimo rezultatai (tik 5 testavimo) aprašyti faile simboliu_analize.txt. Failas yra automatiškai sugeneruotas.  
 
 REZULTATAI:  
 
-5 testų vidurkis:
+5 testų vidurkis:  
 | Slaptažodžio simbolių kiekis (failas) | Vidutiniškai panaudotų unikalių simbolių pozicijoje (16 max, geriausias rezultatas) | Daugiausiai pasikartojusių simbolių dažnio vidurkis | Mažiausiai pasikartojančių simbolių dažnio vidurkis | Vidutinis pasikartojimo dažnis | daugiausiai pasikartojusio simbolio dažnis vienoje pozicijoje (pozicija) | Bitų lygmens pasikartojimo dažnio vidurkis |
 | ------------- | ------------ | ----------------------------------- | --------- | ---------- | ---------- | ---------- |
 |10 (output1.txt)|15.636|28.886%|2.202%|6.478%|80.578% (3 iš 5 - 23 pozicijoje)|46.886%|
