@@ -8,7 +8,7 @@ void hashTest() {
 		cout << "------------------------------------------------------------------------\n";
 		cout << "1 - HEX isvedimo ilgis\n";
 		cout << "2 - Deterministiskumas\n";
-		cout << "3 - File read with Line Amount Selection\n";
+		cout << "3 - Konstitucija\n";
 		cout << "4 - Poru generavimas\n";
 		cout << end << " - Baigti darba\n";
 		cout << "------------------------------------------------------------------------\n";
@@ -19,13 +19,13 @@ void hashTest() {
 
 		switch (menuPasirinkimas) {
 		case 1:
-			outputLength();
+			outputLengthTest();
 			break;
 		case 2:
 			deterministicTest();
 			break;
 		case 3:
-			hashFileLAS();
+			konstitucijaTest();
 			break;
 		case 4:
 			cout << "\nPlaceholder text\n\n";
@@ -37,7 +37,7 @@ void hashTest() {
 	}
 }
 
-void outputLength() {
+void outputLengthTest() {
 	cout << "\n";
 
 
@@ -113,47 +113,76 @@ void deterministicTest() {
 	cout << "\n\n";
 }
 
-void hashFileLAS() {
-	cout << "\n";
-	cout << "\nIveskite kiek eiluciu norite nuskaityti is failo (0 - nuskaito visas eilutes): ";
-	int linesToRead = ivestiesPatikrinimas(0, INT_MAX);
-
-	std::stringstream buffer;
-	std::string fileName = fileNameGetter();
-	cout << "\nPasirinktas failas: " << fileName << "\n";
-	std::ifstream duom(fileName);
+void konstitucijaTest() {
+	const std::string fileName = "konstitucija.txt";
+	std::ifstream duom(fileName, std::ios::binary);
 	if (!duom) {
-		throw std::runtime_error("\nFailas nerastas.\n\n");
+		cout << "'konstitucija.txt' failas nerastas.\n\n";
 		return;
 	}
-	buffer << duom.rdbuf();
+
+	// Nuskaityti visa faila i buferi VIENĄ kartą
+	std::ostringstream raw;
+	raw << duom.rdbuf();
+	std::string content = raw.str();
 	duom.close();
 
-		string line;
-		int processed = 0;
-
-		if (linesToRead <= 0) {
-			// 0 or negative -> read all lines
-			while (std::getline(buffer, line)) {
-				++processed;
-				uint64_t h = chaoticPrimeMixer(line);
-				std::cout << "Line " << std::left << std::setw(10) << processed
-					<< " Decimal: " << std::left << std::setw(25) << h
-					<< " Hex: " << std::left << std::setw(25) << decimalToHex(h) << "\n";
-			}
-		}
-		else {
-			while (processed < linesToRead && std::getline(buffer, line)) {
-				++processed;
-				uint64_t h = chaoticPrimeMixer(line);
-				std::cout << "Line " << std::left << std::setw(10) << processed
-					<< " Decimal: " << std::left << std::setw(25) << h
-					<< " Hex: " << std::left << std::setw(25) << decimalToHex(h) << "\n";
-			}
-			if (processed < linesToRead) {
-				std::cout << "\nFailas turi tik " << processed
-					<< " eiluciu (prasete " << linesToRead << ").\n";
-			}
-		}
-		std::cout << "\n";
+	if (content.empty()) {
+		cout << "Failas tuscias.\n";
+		return;
 	}
+
+	// Suskaiciuoti eiluciu kieki
+	size_t totalLines = 0;
+	{
+		std::istringstream iss(content);
+		std::string tmp;
+		while (std::getline(iss, tmp)) ++totalLines;
+	}
+	if (totalLines == 0) {
+		cout << "Eiluciu nerasta.\n";
+		return;
+	}
+
+	cout << "Bendras eiluciu skaicius faile: " << totalLines << "\n";
+	cout << "Vykdomas eksponentinis skaitymo testas (1,2,4,...)\n";
+
+	const int iterations = 20;
+
+	for (size_t linesToRead = 1; linesToRead <= totalLines; linesToRead <<= 1) {
+		size_t target = std::min(linesToRead, totalLines);
+
+		sec totalTime{ 0.0 }; // accumulate as seconds (sec = std::chrono::duration<double>)
+		for (int it = 0; it < iterations; ++it) {
+			std::istringstream iss(content);
+			std::string line;
+			size_t count = 0;
+			volatile size_t sink = 0; // keep loop work observable
+
+			auto start = hrClock::now();
+			while (count < target && std::getline(iss, line)) {
+				sink += line.size();
+				++count;
+			}
+			auto end = hrClock::now();
+			totalTime += (end - start); // (end-start) is a duration; added directly
+		}
+
+		double avgSec = (totalTime / iterations).count();
+
+		// Fixed formatting similar to your snippet
+		std::ios::fmtflags oldFlags = cout.flags();
+		auto oldPrec = cout.precision();
+		cout << std::fixed << std::setprecision(8);
+
+		cout << "Lines: " << std::left << std::setw(10) << target
+			<< " in: " << avgSec << " sec\n";
+
+		cout.flags(oldFlags);
+		cout.precision(oldPrec);
+
+		if (target == totalLines) break;
+	}
+
+	cout << "\n";
+}
