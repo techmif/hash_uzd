@@ -32,10 +32,21 @@ Tačiau šįkart slaptažodžiai keitėsi tarpusavyje tik po vieną simbolį.
 Kolizijų failuose aptikta nebuvo.  
 
 REZULTATAI:  
+
+5 testų vidurkis:
+| Slaptažodžio simbolių kiekis (failas) | Vidutiniškai panaudotų unikalių simbolių pozicijoje (16 max, geriausias rezultatas) | Daugiausiai pasikartojusių simbolių dažnio vidurkis | Mažiausiai pasikartojančių simbolių dažnio vidurkis | Vidutinis pasikartojimo dažnis | daugiausiai pasikartojusio simbolio dažnis vienoje pozicijoje (pozicija) | Bitų lygmens pasikartojimo dažnio vidurkis | komentaras |
+| ------------- | ------------ | ----------------------------------- | --------- | ---------- | ---------- | ---------- | ---------- |
+|10 (output1.txt)|15.636|28.886%|2.202%|6.478%|80.578%|46.886%||
+|100 (output2.txt)|15.98|6.738%|3.086%|6.26%|7.37% (visada 3 pozicijoje)|51.892%||
+|500 (output3.txt)|15.98|6.738%|3.092%|6.26%|7.142% (4 iš 5 testų 3 pozicijoje)|51.924%||
+|1000 (output4.txt)|15.98|||6.26%||||
+|vidurkis (visi failai)||||||||
+
+
 1 testavimas:
 | Slaptažodžio simbolių kiekis (failas) | Vidutiniškai panaudotų unikalių simbolių pozicijoje (16 max, geriausias rezultatas) | Daugiausiai pasikartojusių simbolių dažnio vidurkis | Mažiausiai pasikartojančių simbolių dažnio vidurkis | Vidutinis pasikartojimo dažnis | daugiausiai pasikartojusio simbolio dažnis vienoje pozicijoje (pozicija) | Bitų lygmens pasikartojimo dažnio vidurkis | nuotrauka | komentaras |
 | ------------- | ------------ | ----------------------------------- | --------- | ---------- | ---------- | ---------- | ---------- | ---------- |
-|10 (output1.txt)|15.59|28.04%|2.20%|6.56%|83.553% (26)|47.935%|<img width="85" height="14" alt="image" src="https://github.com/user-attachments/assets/479cc2b5-c4bc-4d09-93eb-f63ded33d354" />|Mažesniame faile pasikartojimų vidurkiai prastesni|
+|10 (output1.txt)|15.59|28.04%|2.20%|6.56%|83.55% (26)|47.94%|<img width="85" height="14" alt="image" src="https://github.com/user-attachments/assets/479cc2b5-c4bc-4d09-93eb-f63ded33d354" />|Mažesniame faile pasikartojimų vidurkiai prastesni|
 |100 (output2.txt)|15.98|6.75%|3.09%|6.26%|7.44% (3)|51,89%|<img width="85" height="14" alt="image" src="https://github.com/user-attachments/assets/ad8e5a33-54bc-4efe-a21a-852987872d39" />|Paprastas vidurkis daug mažesnis, bet bitų lygmenyje pakilo|
 |500 (output3.txt)|15.98|6.74%|3.09%|6.26%|7.05% (3)|51.93%|<img width="85" height="14" alt="image" src="https://github.com/user-attachments/assets/b5cc075a-acef-4ea9-9926-d770a63288cb" />||
 |1000 (output4.txt)|15.98|6.76%|3.10%|6.26%|7.21% (11)|51,93%|<img width="85" height="14" alt="image" src="https://github.com/user-attachments/assets/a62e16fa-652b-4541-99d8-1f050ff3e690" />||
@@ -51,12 +62,12 @@ REZULTATAI:
 
 
 3 testavimas:
-| Slaptažodžio simbolių kiekis (failas) | Vidutiniškai panaudotų unikalių simbolių pozicijoje (16 max, geriausias rezultatas) | Daugiausiai pasikartojusių simbolių dažnio vidurkis | Mažiausiai pasikartojančių simbolių dažnio vidurkis | Vidutinis pasikartojimo dažnis | daugiausiai pasikartojusio simbolio dažnis vienoje pozicijoje (pozicija) | Bitų lygmens pasikartojimo dažnio vidurkis | nuotrauka | komentaras |
-| ------------- | ------------ | ----------------------------------- | --------- | ---------- | ---------- | ---------- | ---------- | ---------- |
-|10 (output1.txt)|15.66|27.85%|2.24%|6.45%|63.70% (23)|46,34%|<img width="85" height="17" alt="image" src="https://github.com/user-attachments/assets/2cdd2073-7998-4298-bf6f-b69e7bb850e9" />||
-|100 (output2.txt)|15.98|6.74%|3.09%|6.26%|7.34% (3)|51,90%|<img width="85" height="17" alt="image" src="https://github.com/user-attachments/assets/958ea0e3-1adb-4444-9aaf-c6150ea1914d" />||
-|500 (output3.txt)|15.98|6.74%|3.09%|6.26%|7.08% (13)|51,93%|<img width="85" height="17" alt="image" src="https://github.com/user-attachments/assets/a0fed995-83db-463a-99fd-45b64380326b" />||
-|1000 (output4.txt)|15.98|6.76%|3.09%|6.26%|7.05% (21)|51,91%|<img width="85" height="17" alt="image" src="https://github.com/user-attachments/assets/5df68aea-78f4-428e-80b4-4ed7a990a930" />||
+| Slaptažodžio simbolių kiekis (failas) | Vidutiniškai panaudotų unikalių simbolių pozicijoje (16 max, geriausias rezultatas) | Daugiausiai pasikartojusių simbolių dažnio vidurkis | Mažiausiai pasikartojančių simbolių dažnio vidurkis | Vidutinis pasikartojimo dažnis | daugiausiai pasikartojusio simbolio dažnis vienoje pozicijoje (pozicija) | Bitų lygmens pasikartojimo dažnio vidurkis | nuotrauka |
+| ------------- | ------------ | ----------------------------------- | --------- | ---------- | ---------- | ---------- | ---------- |
+|10 (output1.txt)|15.66|27.85%|2.24%|6.45%|63.70% (23)|46,34%|<img width="85" height="17" alt="image" src="https://github.com/user-attachments/assets/2cdd2073-7998-4298-bf6f-b69e7bb850e9" />|
+|100 (output2.txt)|15.98|6.74%|3.09%|6.26%|7.34% (3)|51,90%|<img width="85" height="17" alt="image" src="https://github.com/user-attachments/assets/958ea0e3-1adb-4444-9aaf-c6150ea1914d" />|
+|500 (output3.txt)|15.98|6.74%|3.09%|6.26%|7.08% (13)|51,93%|<img width="85" height="17" alt="image" src="https://github.com/user-attachments/assets/a0fed995-83db-463a-99fd-45b64380326b" />|
+|1000 (output4.txt)|15.98|6.76%|3.09%|6.26%|7.05% (21)|51,91%|<img width="85" height="17" alt="image" src="https://github.com/user-attachments/assets/5df68aea-78f4-428e-80b4-4ed7a990a930" />|
 
 
 4 testavimas:
