@@ -1,8 +1,8 @@
 #include "hashLib.h"
 #include "functionCalls.h"
 
-int main()
-{
+int main(){
+	std::cin.exceptions(std::ios::failbit);
 	int end = 4;
 	while (true) {
 		cout << "Pasirinkite norima hasho veikla irasant skaiciu nuo 1 iki " << end << ".\n";
@@ -15,7 +15,7 @@ int main()
 		int menuPasirinkimas = ivestiesPatikrinimas(1, end, end);
 
 
-		if (menuPasirinkimas == end) { cout << "\n\nProgram finished\n"; break; }
+		if (menuPasirinkimas == end) { cout << "\nProgram finished\n\n"; break; }
 
 		switch (menuPasirinkimas) {
 		case 1:
