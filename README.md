@@ -51,6 +51,44 @@ REZULTATAI:
 |vidurkis (visi failai)|15.894|12.279%|2.870%|6.315%|25.552%|50.652%|
 
 
+## 3 testas ##
+Tekslo tikslas - nuskaitymo iš failų rezultato patikrinimas.  
+Viskas veikia taip, kaip turėtų: tie patys failai visad duoda tą patį hash, hash ilgis visur vienodas (64 hex simbolių).  
+
+Dviejų trumpų (1 simbolio ilgio) failų rezultatai:  
+<img width="757" height="40" alt="image" src="https://github.com/user-attachments/assets/bd16fe43-48a7-414b-bef1-5f74fd7a304d" />  
+<img width="757" height="40" alt="image" src="https://github.com/user-attachments/assets/820a3b09-9810-4556-8f56-16c09ec5cc24" />  
+
+Dviejų ilgų (2000 simbolių ilgio) failų, kurie skiriasi tik 1 simboliu, rezultatai:  
+<img width="757" height="40" alt="image" src="https://github.com/user-attachments/assets/3e12b2a3-5be9-45ea-90e5-0f60d683ab0f" />  
+<img width="757" height="40" alt="image" src="https://github.com/user-attachments/assets/a3408638-8b8f-4579-9d32-a4265ed5922e" />  
+
+Dviejų ilgų (2000 simbolių ilgio) failų, kurie visiškai atsitiktinai sugeneruoti, rezultatai:
+<img width="757" height="40" alt="image" src="https://github.com/user-attachments/assets/a3408638-8b8f-4579-9d32-a4265ed5922e" />  
+<img width="757" height="40" alt="image" src="https://github.com/user-attachments/assets/50a563b1-5860-4f2b-a890-4c5b1abbb8ec" />  
+
+Tuščio failo rezultatas:
+<img width="757" height="40" alt="image" src="https://github.com/user-attachments/assets/b84ddd18-2dfe-465f-97f7-3e22eefaa50c" />  
+
+
+## 4 testas ##
+Testo tikslas - programos efektyvumo (spartumo) analizė.  
+Šiame teste buvo dirbama su vienu failu „konstitucija.txt“, programai paduodama vis po daugiau eilučių vienu metu ir skaičiuojamas laikas, skirtas hash sugeneravimui.   
+
+Iš rezultatų galime matyti, kad nesvarbu, kokio didumo įvestis, failas skaitomas ganėtinai sparčiai.  
+
+REZULTATAI:
+| Bandymo numeris | 1 eilutė | 2 eilutės | 4 eilutės | 8 eilutės | 16 eilučių |  32 eilutės | 64 eilutės | 128 eilutės | 256 eilutės | visas failas | nuotrauka |
+| ------------- | ------------ | ----------------------------------- | --------- | ---------- | ---------- | ---------- | ---- | ----- | ---- | ---- | --- |
+|1|0.001807s|0.002130s|0.001935s|0.001352s|0.001122s|0.001888s|0.001238s|0.001884s|0.003182s|0.006630s| <img width="61" height="43" alt="image" src="https://github.com/user-attachments/assets/b54aa551-d977-4044-9e2d-fccfc6bc42eb" />|
+|2|0.002027s|0.001769s|0.001626s|0.001718s|0.001401s|0.001465s|0.001594s|0.002746s|0.002601s|0.009349s|<img width="61" height="43" alt="image" src="https://github.com/user-attachments/assets/c9093cb3-535d-4424-b03b-7aa14faf2189" />|
+|3|0.001466s|0.001021s|0.001605s|0.000962s|0.001594s|0.001401s|0.001226s|0.002111s|0.002793s|0.006434s|<img width="61" height="43" alt="image" src="https://github.com/user-attachments/assets/fd7c4f71-65b8-448e-808b-ead349b2d5c1" />|
+|4|0.002604s|0.001787s|0.001129s|0.001494s|0.001025s|0.001142s|0.001960s|0.001989s|0.003625s|0.009566s|<img width="61" height="43" alt="image" src="https://github.com/user-attachments/assets/b654a208-679e-4c67-914d-0642e9bc839f" />|
+|5|0.001608s|0.001675s|0.001559s|0.001106s|0.001644s|0.001554s|0.003036s|0.001832s|0.002230s|0.005926s|<img width="61" height="43" alt="image" src="https://github.com/user-attachments/assets/2a237f69-d045-4ed8-9ed7-832600b567b8" />|
+|vidurkis|0.0019024s|0.0016764s|0.0015708s|0.0013264s|0.0013572s|0.0014900s|0.0018108s|0.0021124s|0.0028862s|0.0075810s|
+							
+
+
 # __Užduoties atlikimo procesas__ #
 ## užduotis be DI pagalbos ##
 1. apsirašiau idėją, sukūriau ideja.txt
