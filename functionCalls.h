@@ -20,8 +20,12 @@ void hashTest();
 void outputLengthTest();
 void deterministicTest();
 void konstitucijaTest();
-void pairGenerator();
 void collisionTest();
+void avalancheTest();
+
+//generators.cpp
+void pairGenerator();
+void similarPairGenerator();
 
 //ivestisPatikrinimas.cpp
 int ivestiesPatikrinimas(const int nuo, const int iki);

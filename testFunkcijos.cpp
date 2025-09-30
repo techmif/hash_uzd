@@ -2,15 +2,17 @@
 #include "functionCalls.h"
 
 void hashTest() {
-	int end = 6;
+	int end = 8;
 	while (true) {
 		cout << "Pasirinkite norima hasho testavimo funkcija irasant skaiciu nuo 1 iki " << end << ".\n";
 		cout << "------------------------------------------------------------------------\n";
-		cout << "1 - HEX isvedimo ilgis\n";
-		cout << "2 - Deterministiskumas\n";
-		cout << "3 - Konstitucija\n";
-		cout << "4 - Kolizija\n";
-		cout << "5 - Poru generavimas\n";
+		cout << "1 - TEST - HEX isvedimo ilgis\n";
+		cout << "2 - TEST - Deterministiskumas\n";
+		cout << "3 - TEST - Konstitucija\n";
+		cout << "4 - TEST - Kolizija\n";
+		cout << "5 - TEST - Lavina\n";
+		cout << "6 - GENS - Poru generavimas\n";
+		cout << "7 - GENS - Panasi poru generavimas\n";
 		cout << end << " - Baigti darba\n";
 		cout << "------------------------------------------------------------------------\n";
 		int menuPasirinkimas = ivestiesPatikrinimas(1, end, end);
@@ -32,7 +34,13 @@ void hashTest() {
 			collisionTest();
 			break;
 		case 5:
+			avalancheTest();
+			break;
+		case 6:
 			pairGenerator();
+			break;
+		case 7:
+			similarPairGenerator();
 			break;
 		default:
 			cout << "\nKlaida pasirenkant meniu punkta. Bandykite is naujo.\n";
@@ -189,58 +197,6 @@ void konstitucijaTest() {
 	cout << "\n";
 }
 
-void pairGenerator() {
-    // Select length
-    cout << "\nPasirinkite poru eiluciu ilgi:\n";
-    cout << "1 - 10\n2 - 100\n3 - 500\n4 - 1000\n";
-    int choice = ivestiesPatikrinimas(1, 4);
-    int length = (choice == 1 ? 10 : choice == 2 ? 100 : choice == 3 ? 500 : 1000);
-
-    const size_t PAIRS = 100'000;
-    std::string fileName = "pairs_" + std::to_string(length) + ".txt";
-    cout << "Failo pavadinimas: " << fileName << "\n";
-
-    std::ofstream out(fileName, std::ios::binary);
-    if (!out) {
-        cout << "Nepavyko sukurti failo.\n";
-        return;
-    }
-
-    // Random generator
-    static const char charset[] =
-        "abcdefghijklmnopqrstuvwxyz"
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        "0123456789";
-    const size_t charsetSize = sizeof(charset) - 1;
-
-    std::random_device rd;
-    std::mt19937_64 rng(rd());
-    std::uniform_int_distribution<size_t> dist(0, charsetSize - 1);
-
-    auto makeRandom = [&](int len) {
-        std::string s;
-        s.resize(static_cast<size_t>(len));
-        for (int i = 0; i < len; ++i) {
-            s[static_cast<size_t>(i)] = charset[dist(rng)];
-        }
-        return s;
-    };
-
-    cout << "Generuojamos poros (" << PAIRS << ")...\n";
-    auto start = hrClock::now();
-
-    for (size_t i = 0; i < PAIRS; ++i) {
-        std::string a = makeRandom(length);
-        std::string b = makeRandom(length);
-        out << a << '\t' << b << '\n';
-    }
-    out.close();
-
-    auto end = hrClock::now();
-    sec dur = end - start;
-    cout << "Generavimas baigtas per: " << std::fixed << std::setprecision(6) << dur.count() << " s\n\n";
-}
-
 void collisionTest() {
     std::string fileName = fileNameGetter();
 
@@ -291,4 +247,101 @@ void collisionTest() {
     cout << "Is ju tikru koliziju:     " << trueCollisions << " (" << trueColPct << " %)\n";
     cout << "Is ju identisku (tas pats tekstas): " << identicalPairs << "\n";
     cout << "Tikrinimo trukme:         " << dur.count() << " s\n\n";
+}
+
+void avalancheTest() {
+	std::string fileName = fileNameGetter();
+
+	std::ifstream in(fileName, std::ios::binary);
+	if (!in) {
+		cout << "Failas nerastas.\n\n";
+		return;
+	}
+
+	auto toHex64 = [](uint64_t v) {
+		std::ostringstream oss;
+		oss << std::hex << std::uppercase << std::setw(16) << std::setfill('0') << v;
+		return oss.str();
+		};
+
+	auto popcount64 = [](uint64_t x) -> int {
+#if defined(_MSC_VER) && defined(_M_X64)
+		return static_cast<int>(__popcnt64(x));
+#else
+		return static_cast<int>(__builtin_popcountll(x));
+#endif
+		};
+
+	size_t totalPairs = 0;
+
+	double sumBitPct = 0.0;
+	double minBitPct = std::numeric_limits<double>::infinity();
+	double maxBitPct = 0.0;
+
+	double sumHexPct = 0.0;
+	double minHexPct = std::numeric_limits<double>::infinity();
+	double maxHexPct = 0.0;
+
+	std::string line;
+	std::string a, b;
+
+	auto start = hrClock::now();
+	while (std::getline(in, line)) {
+		if (line.empty()) continue;
+		auto tabPos = line.find('\t');
+		if (tabPos == std::string::npos) continue;
+		a = line.substr(0, tabPos);
+		b = line.substr(tabPos + 1);
+
+		uint64_t h1 = chaoticPrimeMixer(a);
+		uint64_t h2 = chaoticPrimeMixer(b);
+
+		uint64_t diff = h1 ^ h2;
+		int diffBits = popcount64(diff);
+		double bitPct = (static_cast<double>(diffBits) / 64.0) * 100.0;
+
+		std::string hx1 = toHex64(h1);
+		std::string hx2 = toHex64(h2);
+		int diffHexChars = 0;
+		for (size_t i = 0; i < 16; ++i) {
+			if (hx1[i] != hx2[i]) ++diffHexChars;
+		}
+		double hexPct = (static_cast<double>(diffHexChars) / 16.0) * 100.0;
+
+		sumBitPct += bitPct;
+		if (bitPct < minBitPct) minBitPct = bitPct;
+		if (bitPct > maxBitPct) maxBitPct = bitPct;
+
+		sumHexPct += hexPct;
+		if (hexPct < minHexPct) minHexPct = hexPct;
+		if (hexPct > maxHexPct) maxHexPct = hexPct;
+
+		++totalPairs;
+		if (totalPairs % 20000 == 0) {
+			cout << "Apdorota: " << totalPairs << "\n";
+		}
+	}
+	auto end = hrClock::now();
+	sec dur = end - start;
+
+	if (totalPairs == 0) {
+		cout << "Poru nerasta failuose.\n";
+		return;
+	}
+
+	double avgBitPct = sumBitPct / totalPairs;
+	double avgHexPct = sumHexPct / totalPairs;
+
+	cout << std::fixed << std::setprecision(6);
+	cout << "\nAvalanche rezultatai (" << fileName << ")\n";
+	cout << "Poru kiekis: " << totalPairs << "\n\n";
+	cout << "Bit'u skirtumo % (per 64 bitus):\n"
+		<< "  Min: " << minBitPct << "\n"
+		<< "  Max: " << maxBitPct << "\n"
+		<< "  Avg: " << avgBitPct << "\n\n";
+	cout << "Hex simboliu skirtumo % (per 16 hex simboliu):\n"
+		<< "  Min: " << minHexPct << "\n"
+		<< "  Max: " << maxHexPct << "\n"
+		<< "  Avg: " << avgHexPct << "\n\n";
+	cout << "Testo trukme: " << dur.count() << " s\n\n";
 }
