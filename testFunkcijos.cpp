@@ -132,45 +132,44 @@ void konstitucijaTest() {
 		return;
 	}
 
-	// Suskaiciuoti eiluciu kieki
-	size_t totalLines = 0;
+	// Split into lines once (so later timing isolates ONLY hashing cost)
+	std::vector<std::string> lines;
+	lines.reserve(1024);
 	{
+		std::string current;
 		std::istringstream iss(content);
-		std::string tmp;
-		while (std::getline(iss, tmp)) ++totalLines;
+		while (std::getline(iss, current)) {
+			lines.push_back(current);
+		}
 	}
-	if (totalLines == 0) {
+	if (lines.empty()) {
 		cout << "Eiluciu nerasta.\n";
 		return;
 	}
 
+	size_t totalLines = lines.size();
 	cout << "Bendras eiluciu skaicius faile: " << totalLines << "\n";
-	cout << "Vykdomas eksponentinis skaitymo testas (1,2,4,...)\n";
+	cout << "Vykdomas eksponentinis HASH testas (1,2,4,...)\n";
 
 	const int iterations = 20;
 
-	for (size_t linesToRead = 1; linesToRead <= totalLines; linesToRead <<= 1) {
-		size_t target = std::min(linesToRead, totalLines);
+	for (size_t batch = 1; batch <= totalLines; batch <<= 1) {
+		size_t target = std::min(batch, totalLines);
 
-		sec totalTime{ 0.0 }; // accumulate as seconds (sec = std::chrono::duration<double>)
+		sec totalTime{ 0.0 };
+		volatile uint64_t sink = 0; // prevents optimizer removing hashing loop
+
 		for (int it = 0; it < iterations; ++it) {
-			std::istringstream iss(content);
-			std::string line;
-			size_t count = 0;
-			volatile size_t sink = 0; // keep loop work observable
-
 			auto start = hrClock::now();
-			while (count < target && std::getline(iss, line)) {
-				sink += line.size();
-				++count;
+			for (size_t i = 0; i < target; ++i) {
+				sink ^= chaoticPrimeMixer(lines[i]); // hash each line individually
 			}
 			auto end = hrClock::now();
-			totalTime += (end - start); // (end-start) is a duration; added directly
+			totalTime += (end - start);
 		}
 
 		double avgSec = (totalTime / iterations).count();
 
-		// Fixed formatting similar to your snippet
 		std::ios::fmtflags oldFlags = cout.flags();
 		auto oldPrec = cout.precision();
 		cout << std::fixed << std::setprecision(8);
@@ -183,6 +182,5 @@ void konstitucijaTest() {
 
 		if (target == totalLines) break;
 	}
-
 	cout << "\n";
 }
