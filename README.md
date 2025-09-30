@@ -1,9 +1,29 @@
 # hash_uzd
-Blokų grandinių technologijų užduotis sukurti hash funkciją.
+Blokų grandinių technologijų užduotis sukurti hash funkciją.  
+Visi testavimai ir rezultatai pateikti apačioje.  
 
-Darbą atlikome poroje.  
-Marijus Kuprys atliko dalį be AI pagalbos (pasiskirstėme rolėmis mesdami monetą)  
-Dominykas Pronskus atliko dalį su AI pagalba  
+# Programos veikimo principas (mano hash sprendimas) #
+
+1. Nuskaitomas audio įrašas (be null reikšmių) ir konvertuojamas į dešimtainę sistemą.  
+2. Įrašas suskirstomas į 64 simbolių iteracijas, kurias vadinu „__skirsniais__“. Jie naudojami hash funkcijoje.  
+3. Priimama vartotojo įvestis / nuskaitomas failas.
+4. Priimta __įvestis__ konvertuojama į dešimtainę sistemą ir apskaičiuojamas jai priklausantis skirsnio numeris. Tai padaroma apskaičiuojant simbolių dešimtainių reikšmių sumą.  
+5. Įvestis paduodama Salt generavimui kaip seed. (random generavimo funkciją parašiau su DI pagalba). Grąžinamas __salt__ kintamasis taip pat naudojamas hash funkcijoje. Jis yra 64 simbolių ilgio, hex formatu.  
+6. _Hash funkcija: (hex konvertuota __įvestis__) xor (atitinkamas hex konvertuotas įrašo __skirsnis__) xor (hex __salt__)._
+7. Per trumpi hash generuojami iš naujo su kitu skirsniu ir pridedami prie sugeneruoto.
+8. Per ilgi hash yra sumažinami iki 64 simbolių.
+
+
+# Sprendimo privalumai #
+*  Šis sprendimas turi papildomą apsaugos sluoksnį dėl to, kad niekas kitas neturi tokio audio failo. Dėl to atkurti xor operacijos yra praktiškai neįmanoma. (Žinoma jeigu audio failas nebūtų public).
+*  Šis sprendimas naudoja salting principus. Taip užtikrinamas papildomas saugumo sluoksnis.
+*  Visas procesas veikia ganėtinai greitai (visas konstitucijos failas užhashinamas per < nei 0.008s.).
+*  Mp3 failo suskirstymo skirsniais praktika leidžia kiekvienam slaptažodžiui būti xorinamam su skirtingomis vertėmis. Tai padidina kiekvieno hash skirtumą. Įrašius ilgesnį audio (nors ir 10s), skirsnių būtų vis daugiau. Tačiau siekiant juos pilnai išnaudoti, jungiant juos su įvestimi reiktų kitokios logikos.  
+
+# Sprendimo trūkumai #
+*  Įvedus trumpesnį nei 32 simbolių slaptažodžį, hash funkcija retkarčiais turi pasikartojančių savybių. (Labiausiai matoma 2 teste ir simboliu_analize.txt faile)
+*  Testavimo metu pastebėta, kad ilgesnių nei 32 simbolių slaptažodžių hash labiausiai pasikartojanti pozicija dažniausiai yra trečia. Pats pasikartojimų skaičius nėra drastiškai didesnis už kitų pozicijų, tačiau šioje pozicijoje didžiausias. Nežinau ar tai labai kenkia, bet hash'e nesmagu turėti dėsningai pasikartojančių sąvybių.  
+
 
 # __Testavimo rezultatai__ #
 ## 1 testas ##
