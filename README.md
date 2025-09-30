@@ -46,7 +46,7 @@ REZULTATAI:
 |100 (output2.txt)|15.98|6.738%|3.086%|6.26%|7.37% (visada 3 pozicijoje)|51.892%|
 |500 (output3.txt)|15.98|6.738%|3.092%|6.26%|7.142% (4 iš 5 - 3 pozicijoje)|51.924%|
 |1000 (output4.txt)|15.98|6.752%|3.098%|6.26%|7.118% (2 iš 5 - 7 pozicijoje, 1 - 3 poz.)|51.906%|
-|vidurkis (visi failai)|15.894|12.279%|2.870%|6,315%|25.552%|50.652%|
+|vidurkis (visi failai)|15.894|12.279%|2.870%|6.315%|25.552%|50.652%|
 
 
 # __Užduoties atlikimo procesas__ #
