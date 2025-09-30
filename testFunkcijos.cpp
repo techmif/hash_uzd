@@ -2,13 +2,14 @@
 #include "functionCalls.h"
 
 void hashTest() {
-	int end = 4;
+	int end = 5;
 	while (true) {
 		cout << "Pasirinkite norima hasho testavimo funkcija irasant skaiciu nuo 1 iki " << end << ".\n";
 		cout << "------------------------------------------------------------------------\n";
-		cout << "1 - File read with Line Amount Selection\n";
-		cout << "2 - Failo nuskaitymas\n";
-		cout << "3 - Poru generavimas\n";
+		cout << "1 - HEX isvedimo ilgis\n";
+		cout << "2 - Deterministiskumas\n";
+		cout << "3 - File read with Line Amount Selection\n";
+		cout << "4 - Poru generavimas\n";
 		cout << end << " - Baigti darba\n";
 		cout << "------------------------------------------------------------------------\n";
 		int menuPasirinkimas = ivestiesPatikrinimas(1, end, end);
@@ -21,10 +22,13 @@ void hashTest() {
 			outputLength();
 			break;
 		case 2:
-			cout << "\nFunction not implemented yet.\n";
+			deterministicTest();
 			break;
 		case 3:
-			hashFileLAS(5);
+			hashFileLAS();
+			break;
+		case 4:
+			cout << "\nPlaceholder text\n\n";
 			break;
 		default:
 			cout << "\nKlaida pasirenkant meniu punkta. Bandykite is naujo.\n";
@@ -58,12 +62,64 @@ void outputLength() {
 	cout << "\n\n";
 }
 
-void hashFileLAS(int end) {
+void deterministicTest() {
+	string input = "The quick brown fox jumps over the lazy dog";
+	uint64_t decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog.";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog!";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog?";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog ";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog  ";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog   ";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog    ";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input <<"-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+	cout << "\n\n";
+}
+
+void hashFileLAS() {
 	cout << "\n";
+	cout << "\nIveskite kiek eiluciu norite nuskaityti is failo (0 - nuskaito visas eilutes): ";
+	int linesToRead = ivestiesPatikrinimas(0, INT_MAX);
 
 	std::stringstream buffer;
-	std::string fileName;
-	fileName = fileNameGetter();
+	std::string fileName = fileNameGetter();
 	cout << "\nPasirinktas failas: " << fileName << "\n";
 	std::ifstream duom(fileName);
 	if (!duom) {
@@ -73,16 +129,31 @@ void hashFileLAS(int end) {
 	buffer << duom.rdbuf();
 	duom.close();
 
-		std::string line;
-		int i = 0;
-		while (getline(buffer, line) || i == end) {
-			string input = buffer.str();
-			uint64_t decimal_value = chaoticPrimeMixer(input);
+		string line;
+		int processed = 0;
 
-			cout << "\nLine " << i + 1 << ": " << line;
-
-			cout << "\nDecimal: " << decimal_value << "\n";
-
-			cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+		if (linesToRead <= 0) {
+			// 0 or negative -> read all lines
+			while (std::getline(buffer, line)) {
+				++processed;
+				uint64_t h = chaoticPrimeMixer(line);
+				std::cout << "Line " << std::left << std::setw(10) << processed
+					<< " Decimal: " << std::left << std::setw(25) << h
+					<< " Hex: " << std::left << std::setw(25) << decimalToHex(h) << "\n";
+			}
 		}
+		else {
+			while (processed < linesToRead && std::getline(buffer, line)) {
+				++processed;
+				uint64_t h = chaoticPrimeMixer(line);
+				std::cout << "Line " << std::left << std::setw(10) << processed
+					<< " Decimal: " << std::left << std::setw(25) << h
+					<< " Hex: " << std::left << std::setw(25) << decimalToHex(h) << "\n";
+			}
+			if (processed < linesToRead) {
+				std::cout << "\nFailas turi tik " << processed
+					<< " eiluciu (prasete " << linesToRead << ").\n";
+			}
+		}
+		std::cout << "\n";
 	}

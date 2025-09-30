@@ -17,7 +17,8 @@ void hashFile();
 //testFunkcijos.cpp
 void hashTest();
 void outputLength();
-void hashFileLAS(int end);
+void deterministicTest();
+void hashFileLAS();
 
 //ivestisPatikrinimas.cpp
 int ivestiesPatikrinimas(const int nuo, const int iki);
