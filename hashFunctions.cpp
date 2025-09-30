@@ -30,11 +30,37 @@ void hashManual (){
 	cout << "Iveskite teksta kuri norite hashuoti: \n";
     cin >> input;
 	
-	cout << "\nHash for input \"" << decimalToHex(chaoticPrimeMixer(input)) << "\": ";
+
+    uint64_t decimal_value = chaoticPrimeMixer(input);
+    cout << "\nDecimal: " << decimal_value << "\n";
+
+
+    std::stringstream ss;
+    ss << std::hex << decimal_value;
+    std::string res(ss.str());
+    std::cout << "Hexdecimal: "<< res << "\n";
 }
 
 void hashFile (){
-    cout << "Placeholder" << endl;
+	std::stringstream buffer;
+	std::ifstream duom(fileNameGetter());
+	if (!duom) {
+		throw std::runtime_error("\nFailas nerastas.\n\n");
+		return;
+	}
+	buffer << duom.rdbuf();
+	duom.close();
+
+
+	string input = buffer.str();
+	uint64_t decimal_value = chaoticPrimeMixer(input);
+    cout << "\nDecimal: " << decimal_value << "\n";
+
+
+    std::stringstream ss;
+    ss << std::hex << decimal_value;
+    std::string res(ss.str());
+    std::cout << "Hexdecimal: " << res << "\n";
 }
 
 void hashTest (){

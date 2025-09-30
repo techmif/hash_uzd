@@ -10,8 +10,9 @@
 #include <filesystem>
 #include <numeric>
 #include <cstdint>
-#include <utility>
 #include <algorithm>
+
+namespace fs = std::filesystem;
 
 using std::cout;
 using std::cin;

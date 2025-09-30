@@ -12,11 +12,10 @@ int main()
 		cout << "3 - Testine aplinka\n";
 		cout << end << " - Baigti darba\n";
 		cout << "------------------------------------------------------------------------\n";
-		int menuPasirinkimas; // = ivestiesPatikrinimas(1, end, end);
+		int menuPasirinkimas = ivestiesPatikrinimas(1, end, end);
 
-		cin >> menuPasirinkimas;
 
-		if (menuPasirinkimas == end) { break; }
+		if (menuPasirinkimas == end) { cout << "\n\nProgram finished\n"; break; }
 
 		switch (menuPasirinkimas) {
 		case 1:
