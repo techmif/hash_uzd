@@ -186,13 +186,15 @@ void simboliuanalize() { //parase ai. PROMPT: create a function that would calcu
         in.close();
 
         out << "Failas output" << std::to_string(fileIdx + 1) << ".txt analizė:" << std::endl;
-    // Accumulators for per-file averages
-    double sum_unique = 0.0;
-    double sum_max_rates = 0.0;
-    double sum_min_rates = 0.0;
-    double sum_unrepeated = 0.0;
-    // accumulate bit percentages (b0..b3) across positions
-    double sum_bit_pct[4] = {0.0, 0.0, 0.0, 0.0};
+        // Accumulators for per-file averages
+        double sum_unique = 0.0;
+        double sum_max_rates = 0.0;
+        double sum_min_rates = 0.0;
+        double sum_unrepeated = 0.0;
+        // accumulate bit percentages (b0..b3) across positions
+        double sum_bit_pct[4] = {0.0, 0.0, 0.0, 0.0};
+        // accumulate average repetition-per-position (percentage)
+        double sum_avg_rates = 0.0;
 
         for (int pos = 0; pos < 64; ++pos) {
             int total = 0;
@@ -212,6 +214,8 @@ void simboliuanalize() { //parase ai. PROMPT: create a function that would calcu
             double max_rate = sum ? (double)max_count / sum * 100.0 : 0.0;
             double min_rate = 0.0;
             if (sum && min_count > 0) min_rate = (double)min_count / sum * 100.0;
+            // average repetition rate per position: average symbol percentage = 100 / unique_symbols
+            double avg_rate_pos = total ? (100.0 / (double)total) : 0.0;
 
             // Bit-level percentages for the 4 bits (bit 0 is MSB of the hex digit)
             std::ostringstream bits_ss;
@@ -230,6 +234,7 @@ void simboliuanalize() { //parase ai. PROMPT: create a function that would calcu
             out << "Pozicija " << pos + 1 << ": Unikalių simbolių: " << total
                 << ", Didžiausias pasikartojimo dažnis: " << max_rate << "%"
                 << ", Mažiausias pasikartojimo dažnis: " << min_rate << "%"
+                << ", Vidutinis pasikartojimo dažnis: " << std::fixed << std::setprecision(2) << avg_rate_pos << "%"
                 << ", Nepasikartojančių simbolių: " << unrepeated
                 << ", Bitų pasiskirstymas (MSB..LSB): " << bits_ss.str() << std::endl;
 
@@ -238,6 +243,7 @@ void simboliuanalize() { //parase ai. PROMPT: create a function that would calcu
             sum_max_rates += max_rate;
             sum_min_rates += min_rate;
             sum_unrepeated += unrepeated;
+            sum_avg_rates += avg_rate_pos;
         }
 
         // Print per-file averages
@@ -252,6 +258,9 @@ void simboliuanalize() { //parase ai. PROMPT: create a function that would calcu
         out << "Avg Didžiausias pasikartojimo dažnis (%): " << std::fixed << std::setprecision(2) << avg_max_rate << std::endl;
         out << "Avg Mažiausias pasikartojimo dažnis (%): " << std::fixed << std::setprecision(2) << avg_min_rate << std::endl;
         out << "Avg Nepasikartojančių simbolių: " << std::fixed << std::setprecision(2) << avg_unrepeated << std::endl;
+        // Overall average repetition rate per position (average of per-position averages)
+        double avg_of_pos_avgs = sum_avg_rates / 64.0;
+        out << "Bendras simbolių pasikartojimo vidurkis pozicijoje (%): " << std::fixed << std::setprecision(2) << avg_of_pos_avgs << std::endl;
         // Print average of bit percentages (b0..b3) across all 64 positions
         out << "Avg bitu pasiskirstymas (MSB..LSB) per faila: ";
         for (int bit = 0; bit < 4; ++bit) {
@@ -262,8 +271,8 @@ void simboliuanalize() { //parase ai. PROMPT: create a function that would calcu
         out << std::endl;
         out << std::endl;
         cout<<fileIdx+1<<" failas isanalizuotas"<<endl;
-    }
-    out.close();
+        }
+        out.close();
 }
 
 int main (){
@@ -340,7 +349,7 @@ int main (){
                     suma = Sumax10(konvertuota_ivestis);
                     hashFunkcija(nuskaityti_binary_duomenys, konvertuota_ivestis, suma, hash, konvertuota_druskyte);
                     if(j%10000==0) cout<<".";
-                    if(j==50000) cout<<"pusiaukele..";
+                    if(j==50000) cout<<(i+1)*25<<"%..";
                     out<<input<<" "<<hash<<endl;
                     clearData(input,hash,salt,suma,konvertuota_ivestis,konvertuota_druskyte); //isvalom kintamuosius
                 }
