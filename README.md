@@ -82,7 +82,7 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 
 (-) Veikimas eksponentiškas, labai blogas.
 
-(-) Didelė tikimybė kolizijų, nes hash'as tik 64 bitų arba 16 hex skaičių (galima nesunkiai praplėsti).
+(-) Didelė tikimybė kolizijų, nes hash'as tik 64 bitų, matytusi su ~2^32 įvestims (galima nesunkiai praplėsti).
 
 (+) Ypač gerai pasižymi lavinos efektu, nes pakeitus įvesti vienu simboliu hash'as labai stipriai skiriasi.
 
