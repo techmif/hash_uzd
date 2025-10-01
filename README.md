@@ -83,7 +83,7 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 
 (+) Deterministiška.
 
-(-) Veikimas eksponentiškas, labai blogas.
+(+) Veikimas linijinis.
 
 (-) Didelė tikimybė kolizijų, nes hash'as tik 64 bitų, matytusi su ~2^32 įvestims (galima nesunkiai praplėsti).
 
@@ -94,3 +94,11 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 (-) Hash'as ne kriptografiškas.
 
 (-) Pirminių skaičių lentelė kartojasi kas 10 baitų, tai hash funkcijai gali pridėti nuspėjamumo.
+
+# Palyginimas su SHA-256
+My_hash vs SHA-256
++   Išvestis: 64-bit vs 256-bit.
++   Apsauga: Ne vs Taip.
++   Kolizijos atsparumas: Silpnas vs Labai stiprus.
++   Paprastumas: Paprastas vs Vidutinis.
++   Tinkamas piknaudiškoms įvestims / Sunku atkurti veikimą: Ne vs Taip.
