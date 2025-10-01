@@ -1,7 +1,7 @@
 #include "lib.hpp"
-#include "pagalbines_funkcijos.cpp"
-#include "test_functions.cpp"
-#include "hash_funkcija.cpp"
+#include "pagalbines_funkcijos.hpp"
+#include "test_functions.hpp"
+#include "hash_funkcija.hpp"
 
 int main (){
     string input, hash, salt;
