@@ -31,7 +31,7 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 5. Pradėjau kurti testines funkcijas eksperimentams 🔬.
 6. Testinės funkcijos sukurtos.
 7. Palyginau savo hash'a su SHA-256.
-8. Nelyginau savo hash'o su kursioko hash'u, nes užduotis reikalauja .
+8. Nelyginau savo hash'o su kursiokų hash'ais, nes užduotis reikalauja ne AI padarytos funkcijos.
 
 # Eksperimentai
 
