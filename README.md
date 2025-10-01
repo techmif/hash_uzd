@@ -1,11 +1,11 @@
-# Pradžia
+# Pradžia 🍗
 Blokų grandinių technologijų užduotis sukurti hash funkciją.
 
-Darbą atlikome poroje.  
-Marijus Kuprys atliko dalį be AI pagalbos (pasiskirstėme rolėmis mesdami monetą)  
-Dominykas Pronskus atliko dalį su AI pagalba  
+✌ Darbą atlikome poroje.  
+Marijus Kuprys (🐐) atliko dalį be AI pagalbos (pasiskirstėme rolėmis mesdami monetą)  
+Dominykas Pronskus (🐫) atliko dalį su AI pagalba  
 
-Ši užduoties dalis daryta pasitelkiant AI įrankiais (ChatGPT, Clyde etc.).
+🤖 Ši užduoties dalis daryta pasitelkiant AI įrankiais (ChatGPT, Clyde etc.).
 
 # Hash veikimo principas
 
@@ -26,7 +26,7 @@ Dominykas Pronskus atliko dalį su AI pagalba
 7. Atliekamas galutinė lavina, tam kad beveik kiekvienas įvesties pokytis keistų daugumą išėjimo bitų;
 8. Grąžinamas 64-bitų sveikasis skaičius (uint64_t), kurį galima rodyti dešimtainiu arba šešioliktainiu formatu.
 
-# Darbo eiga
+# 💤Darbo eiga
 
 1. Forkinau main repo, kad release'as nesimuštu su mano grupioko release'u
 2. Visų pirmą padariau meniu, kad programą būtų lengva naudoti.
@@ -37,7 +37,7 @@ Dominykas Pronskus atliko dalį su AI pagalba
 7. Palyginau savo hash'a su SHA-256.
 8. Nelyginau savo hash'o su kursiokų hash'ais, nes užduotis reikalauja ne AI padarytos funkcijos.
 
-# Eksperimentai
+# 🧪Eksperimentai
 
 1. Failai sukurti, hash'as veikia su visais.
 2. Pasinaudojant pirma testine funkcija, įvedus bet kokį .txt failą, visada gaunasi tokio pat ilgio hex skaičius.
@@ -92,7 +92,7 @@ Rezultatai:
 
 <img width="509" height="167" alt="image" src="https://github.com/user-attachments/assets/67c934bc-3a78-41dc-922e-f364bfa952be" />
 
-# Išvados
+# 🍕Išvados
 
 (+) Veikia.
 
