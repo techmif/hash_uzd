@@ -9,6 +9,14 @@
 
 //hash.cpp
 uint64_t chaoticPrimeMixer(const std::string& input, uint64_t salt = 0);
+/*
+// naudojimas:
+//auto h = chaoticPrimeMixer256(input, salt);
+//std::string hex = hash256ToHex(h);
+
+Hash256 chaoticPrimeMixer256(const std::string& input, uint64_t salt = 0);
+std::string hash256ToHex(const Hash256& h, bool uppercase = true);
+*/
 
 //hashFunctions.cpp
 void hashManual();

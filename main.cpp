@@ -13,6 +13,7 @@ int main(){
 		cout << "4 - Testine aplinka\n";
 		cout << end << " - Baigti darba\n";
 		cout << "------------------------------------------------------------------------\n";
+
 		int menuPasirinkimas = ivestiesPatikrinimas(1, end, end);
 
 
