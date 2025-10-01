@@ -127,3 +127,6 @@ My_hash vs SHA-256
 +   Greitis: Priklauso nuo įvesties dydžio, su mažesnėm įvestim my_hash daro mažiau veiksmų ir dėl to greitesnis, bet su didesnėm įvestim SHA-256 greit susitapatina ir dar greičiau aplenkia pasitelkiant savo itin dideliu pralaidumu.
 +   Tinkamas piknaudiškoms įvestims / Sunku atkurti veikimą: Ne vs Taip.
 +   Žinomas: Ne vs Taip
+
+Šis palyginimas vizualiai apibendrinamas šia nuotrauka:
+![NotFunny](https://github.com/user-attachments/assets/3748c717-3485-425d-ad19-d9fbd8f3316d)
