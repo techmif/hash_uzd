@@ -1,6 +1,10 @@
 # Pradžia
 Blokų grandinių technologijų užduotis sukurti hash funkciją.
 
+Darbą atlikome poroje.  
+Marijus Kuprys atliko dalį be AI pagalbos (pasiskirstėme rolėmis mesdami monetą)  
+Dominykas Pronskus atliko dalį su AI pagalba  
+
 Ši užduoties dalis daryta pasitelkiant AI įrankiais (ChatGPT, Clyde etc.).
 
 # Hash veikimo principas
