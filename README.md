@@ -74,8 +74,7 @@ Dominykas Pronskus atliko dalį su AI pagalba
 
 <img width="509" height="167" alt="image" src="https://github.com/user-attachments/assets/67c934bc-3a78-41dc-922e-f364bfa952be" />
 
-
-8. Išvados
+# Išvados
 
 (+) Veikia.
 
@@ -88,6 +87,8 @@ Dominykas Pronskus atliko dalį su AI pagalba
 (+) Deterministiška.
 
 (+) Veikimas linijinis.
+
+(-) Nesaugi.
 
 (-) Didelė tikimybė kolizijų, nes hash'as tik 64 bitų, matytusi su ~2^32 įvestims (galima nesunkiai praplėsti).
 
