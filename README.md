@@ -2,6 +2,12 @@
 Blokų grandinių technologijų užduotis sukurti hash funkciją.  
 Visi testavimai ir rezultatai pateikti apačioje.  
 
+# V1.1 #
+Užduoties sprendimas su tvarkingu kodu.
+
+# V1.0 #
+Pirminis užduoties sprendimo variantas (be kodo apvalymo)
+
 # Programos veikimo principas (mano hash sprendimas) #
 
 1. Nuskaitomas audio įrašas (be null reikšmių) ir konvertuojamas į dešimtainę sistemą.  
@@ -16,9 +22,10 @@ Visi testavimai ir rezultatai pateikti apačioje.
 
 # Sprendimo privalumai #
 *  Šis sprendimas turi papildomą apsaugos sluoksnį dėl to, kad niekas kitas neturi tokio audio failo. Dėl to atkurti xor operacijos yra praktiškai neįmanoma. (Žinoma jeigu audio failas nebūtų public).
-*  Šis sprendimas naudoja salting principus. Taip užtikrinamas papildomas saugumo sluoksnis.
+*  Šis sprendimas naudoja salting principus. Taip užtikrinamas papildomas saugumo sluoksnis. Kadangi salt generuojamas iš išvesties, išvesties atkūrimas tampa dar sunkesnis.  
 *  Visas procesas veikia ganėtinai greitai (visas konstitucijos failas užhashinamas per < nei 0.008s.).
-*  Mp3 failo suskirstymo skirsniais praktika leidžia kiekvienam slaptažodžiui būti xorinamam su skirtingomis vertėmis. Tai padidina kiekvieno hash skirtumą. Įrašius ilgesnį audio (nors ir 10s), skirsnių būtų vis daugiau. Tačiau siekiant juos pilnai išnaudoti, jungiant juos su įvestimi reiktų kitokios logikos.  
+*  Mp3 failo suskirstymo skirsniais praktika leidžia kiekvienam slaptažodžiui būti xorinamam su skirtingomis vertėmis. Tai padidina kiekvieno hash skirtumą. Įrašius ilgesnį audio (nors ir 10s), skirsnių būtų vis daugiau. Tačiau siekiant juos pilnai išnaudoti, jungiant juos su įvestimi reiktų kitokios logikos.
+*  Labai sunku atstatyti: kadangi kreipiantis paskiriamas audio failo skyrius, nežinant pradinės įvesties sužinoti koksai jis buvo priskirtas būtų labai sunku. 
 
 # Sprendimo trūkumai #
 *  Įvedus trumpesnį nei 32 simbolių slaptažodžį, hash funkcija retkarčiais turi pasikartojančių savybių. (Labiausiai matoma 2 teste ir simboliu_analize.txt faile)
