@@ -8,7 +8,7 @@
 // tuščias
 
 //hash.cpp
-uint64_t chaoticPrimeMixer(const std::string& input);
+uint64_t chaoticPrimeMixer(const std::string& input, uint64_t salt = 0);
 
 //hashFunctions.cpp
 void hashManual();
@@ -22,6 +22,7 @@ void deterministicTest();
 void konstitucijaTest();
 void collisionTest();
 void avalancheTest();
+void saltTest();
 
 //generators.cpp
 void pairGenerator();

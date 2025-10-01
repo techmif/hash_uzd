@@ -11,8 +11,9 @@ void hashTest() {
 		cout << "3 - TEST - Konstitucija\n";
 		cout << "4 - TEST - Kolizija\n";
 		cout << "5 - TEST - Lavina\n";
-		cout << "6 - GENS - Poru generavimas\n";
-		cout << "7 - GENS - Panasi poru generavimas\n";
+		cout << "6 - TEST - Druskinimas\n";
+		cout << "7 - GENS - Poru generavimas\n";
+		cout << "8 - GENS - Panasi poru generavimas\n";
 		cout << end << " - Baigti darba\n";
 		cout << "------------------------------------------------------------------------\n";
 		int menuPasirinkimas = ivestiesPatikrinimas(1, end, end);
@@ -37,9 +38,12 @@ void hashTest() {
 			avalancheTest();
 			break;
 		case 6:
-			pairGenerator();
+			saltTest();
 			break;
 		case 7:
+			pairGenerator();
+			break;
+		case 8:
 			similarPairGenerator();
 			break;
 		default:
@@ -80,8 +84,26 @@ void deterministicTest() {
 	cout << "\nInput:-" << input << "-";
 	cout << "\nDecimal: " << decimal_value;
 	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+	
+	input = "The quick brown fox jumps over the lazy dog";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
 
 	input = "The quick brown fox jumps over the lazy dog.";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog.";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog!";
 	decimal_value = chaoticPrimeMixer(input);
 	cout << "\nInput:-" << input << "-";
 	cout << "\nDecimal: " << decimal_value;
@@ -99,7 +121,25 @@ void deterministicTest() {
 	cout << "\nDecimal: " << decimal_value;
 	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
 
+	input = "The quick brown fox jumps over the lazy dog?";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
 	input = "The quick brown fox jumps over the lazy dog ";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog ";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog  ";
 	decimal_value = chaoticPrimeMixer(input);
 	cout << "\nInput:-" << input << "-";
 	cout << "\nDecimal: " << decimal_value;
@@ -114,6 +154,18 @@ void deterministicTest() {
 	input = "The quick brown fox jumps over the lazy dog   ";
 	decimal_value = chaoticPrimeMixer(input);
 	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog   ";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input << "-";
+	cout << "\nDecimal: " << decimal_value;
+	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
+
+	input = "The quick brown fox jumps over the lazy dog    ";
+	decimal_value = chaoticPrimeMixer(input);
+	cout << "\nInput:-" << input <<"-";
 	cout << "\nDecimal: " << decimal_value;
 	cout << "\nHexdecimal: " << decimalToHex(decimal_value) << "\n";
 
@@ -344,4 +396,17 @@ void avalancheTest() {
 		<< "  Max: " << maxHexPct << "\n"
 		<< "  Avg: " << avgHexPct << "\n\n";
 	cout << "Testo trukme: " << dur.count() << " s\n\n";
+}
+
+void saltTest() {
+	std::string input = "The quick brown fox jumps over the lazy dog";
+	cout << "\nInput:-" << input << "-\n\n";
+	cout << "Unsalted decimal: " << chaoticPrimeMixer(input) << "  Hex: " << decimalToHex(chaoticPrimeMixer(input)) << "\n\n";
+	for (uint64_t salt = 0; salt <= 5; ++salt) {
+		uint64_t decimal_value = chaoticPrimeMixer(input, salt);
+		cout << "Salt: " << salt
+			<< "  Decimal: " << std::left << std::setw(22) << decimal_value
+			<< "  Hex: " << decimalToHex(decimal_value) << "\n";
+	}
+	cout << "\n\n";
 }
