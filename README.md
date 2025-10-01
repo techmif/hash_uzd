@@ -3,6 +3,24 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 
 Ši užduoties dalis daryta pasitelkiant AI įrankiais (ChatGPT, Clyde etc.).
 
+# Hash veikimo principas
+
+1. Funkcija priima tekstinę įvestį (string) ir pasirenkamą druskos reikšmę.
+2. Inicijuoja pradinę 64-bitų būseną (state), ją pakoreguodama druska, jei druska nenurodyta, tada naudojama 0;
+3. Paruoštas nedidelis 10 pirminių skaičių masyvas.
+4. Pereina per kiekvieną įvesties simbolį:
+   
+   4.1. Paimamas simbolio baitas;
+   
+   4.2. Prie jo pridedama pozicijos svoris (i << 8), kad pozicija turėtų įtaką;
+   
+   4.3. Padauginama iš ciklinio pirminio skaičiaus;
+   
+   4.4. Įmaišomi keli bitai iš druskos;
+   
+6. Pasibaigus ciklui papildomai įmaišomas bendras įvesties ilgis ir druska.
+7. Atliekamas galutinė lavina, tam kad beveik kiekvienas įvesties pokytis keistų daugumą išėjimo bitų;
+8. Grąžinamas 64-bitų sveikasis skaičius (uint64_t), kurį galima rodyti dešimtainiu arba šešioliktainiu formatu.
 
 # Darbo eiga
 
@@ -52,15 +70,24 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 
 8. Išvados
 
-Paprašius AI iškart gauva trumpa, lengvai skaitoma hash'o funkciją.
-+ Veikia.
-+ Mažai kodo, lengvai skaitomas.
-+ Priima bet kokį simbolį.
-+ Visada tokio pačio dydžio išvestis.
-+ Deterministiška.
-- Veikimas eksponentiškas, labai blogas.
-- Didelė tikimybė kolizijų, nes hash'as tik 64 bitų arba 16 hex skaičių (galima nesunkiai praplėsti).
-+ Ypač gerai pasižymi lavinos efektu, nes pakeitus įvesti vienu simboliu hash'as labai stipriai skiriasi.
-+ Lengva įterpti druska.
-- Hash'as ne kriptografiškas.
-- Pirminių skaičių lentelė kartojasi kas 10 baitų, tai hash funkcijai gali pridėti nuspėjamumo.
+(+) Veikia.
+
+(+) Mažai kodo, lengvai skaitomas.
+
+(+) Priima bet kokį simbolį.
+
+(+) Visada tokio pačio dydžio išvestis.
+
+(+) Deterministiška.
+
+(-) Veikimas eksponentiškas, labai blogas.
+
+(-) Didelė tikimybė kolizijų, nes hash'as tik 64 bitų arba 16 hex skaičių (galima nesunkiai praplėsti).
+
+(+) Ypač gerai pasižymi lavinos efektu, nes pakeitus įvesti vienu simboliu hash'as labai stipriai skiriasi.
+
+(+) Lengva įterpti druska.
+
+(-) Hash'as ne kriptografiškas.
+
+(-) Pirminių skaičių lentelė kartojasi kas 10 baitų, tai hash funkcijai gali pridėti nuspėjamumo.
