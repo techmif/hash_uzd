@@ -14,7 +14,7 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 
 # Eksperimentai
 
-1. Failai sukurti.
+1. Failai sukurti, hash'as veikia su visais.
 2. Pasinaudojant pirma testine funkcija, įvedus bet kokį .txt failą, visada gaunasi tokio pat ilgio hex skaičius.
 3. Pasinaudojant antra testine funkcija, yra premade funkcijos kurios pasikartoja viena pio kitos ir gaunasi ta pats decimal bei hex skaičius.
 4. Pasinaudojant trečia funkcija gauname vidutinį laiko rezultatą iš konstitucija.txt failo hashuojant eksponentiškai didėjantį linijų kiekį po 20 kartų. Rezultatai:
@@ -53,7 +53,9 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 8. Išvados
 
 Paprašius AI iškart gauva trumpa, lengvai skaitoma hash'o funkciją.
-+ Veikia
++ Veikia.
++ Mažai kodo, lengvai skaitomas.
++ Priima bet kokį simbolį.
 + Visada tokio pačio dydžio išvestis.
 + Deterministiška.
 - Veikimas eksponentiškas, labai blogas.
