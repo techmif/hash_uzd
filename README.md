@@ -7,7 +7,7 @@ Dominykas Pronskus (🐫) atliko dalį su AI pagalba
 
 🤖 Ši užduoties dalis daryta pasitelkiant AI įrankiais (ChatGPT, Clyde etc.).
 
-# Hash veikimo principas
+# 🐲 Hash veikimo principas
 
 1. Funkcija priima tekstinę įvestį (string) ir pasirenkamą druskos reikšmę.
 2. Inicijuoja pradinę 64-bitų būseną (state), ją pakoreguodama druska, jei druska nenurodyta, tada naudojama 0;
