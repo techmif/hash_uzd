@@ -101,4 +101,6 @@ My_hash vs SHA-256
 +   Apsauga: Ne vs Taip.
 +   Kolizijos atsparumas: Silpnas vs Labai stiprus.
 +   Paprastumas: Paprastas vs Vidutinis.
++   Greitis: Priklauso nuo įvesties dydžio, su mažesnėm įvestim my_hash daro mažiau veiksmų ir dėl to greitesnis, bet su didesnėm įvestim SHA-256 greit susitapatina ir dar greičiau aplenkia pasitelkiant savo itin dideliu pralaidumu.
 +   Tinkamas piknaudiškoms įvestims / Sunku atkurti veikimą: Ne vs Taip.
++   Žinomas: Ne vs Taip
