@@ -1,3 +1,5 @@
+#pragma once // padaro, kad failas būtų įtrauktas tik vieną kartą
+
 #include <iostream>
 #include <vector>
 #include <string>
