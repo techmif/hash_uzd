@@ -42,13 +42,26 @@ Dominykas Pronskus atliko dalį su AI pagalba
 1. Failai sukurti, hash'as veikia su visais.
 2. Pasinaudojant pirma testine funkcija, įvedus bet kokį .txt failą, visada gaunasi tokio pat ilgio hex skaičius.
 3. Pasinaudojant antra testine funkcija, yra premade funkcijos kurios pasikartoja viena pio kitos ir gaunasi ta pats decimal bei hex skaičius.
-4. Pasinaudojant trečia funkcija gauname vidutinį laiko rezultatą iš konstitucija.txt failo hashuojant eksponentiškai didėjantį linijų kiekį po 20 kartų. Rezultatai:
+4. Pasinaudojant trečia funkcija gauname vidutinį laiko rezultatą iš konstitucija.txt failo hashuojant eksponentiškai didėjantį linijų kiekį po 20 kartų.
+
+   Naudota:
+   + konstitucija.txt - failas suteiktas užduoties lape, sudarytas iš sakinių skirtingose eilutėse.
+
+   Rezultatai:
 
 <img width="396" height="197" alt="image" src="https://github.com/user-attachments/assets/aa32be99-9195-4473-b1be-67bf0ddaba09" />
 
 <img width="786" height="481" alt="image" src="https://github.com/user-attachments/assets/5c88795f-759a-4a32-b69d-2bca38f48619" />
 
-5. Kolizijų paieška. Panaudojant ketvirtą testinę funkciją, gauname failo pasirinkimą kurio elementus hash'uoja ir playgina. Rezultatai pateikiami procentais:
+5. Kolizijų paieška. Panaudojant ketvirtą testinę funkciją, gauname failo pasirinkimą kurio elementus hash'uoja ir playgina. Rezultatai pateikiami procentais.
+
+   Naudota:
+   + pairs_10.txt - failas sugeneruotas naudojant mt19937, sudaro 100'000 porų kurios yra 10 simbolių ilgumo.
+   + pairs_100.txt - tas pats tik elementai sudaryti iš 100 simbolių ilgumo.
+   + pairs_500.txt - tas pats tik elementai sudaryti iš 500 simbolių ilgumo.
+   + pairs_1000.txt - tas pats tik elementai sudaryti iš 1000 simbolių ilgumo.
+
+   Rezultatai:
 
 10 ilgio simbolių poros
 
@@ -66,7 +79,12 @@ Dominykas Pronskus atliko dalį su AI pagalba
 
 <img width="349" height="103" alt="image" src="https://github.com/user-attachments/assets/4c3d6b58-93ac-4e44-80d8-ee526bc59d38" />
 
-6. Lavinos efektas. Panaudojant penktą funkciją, gauname failo pasirinkimą kurio elementus hash'uos ir palygins poromis. Rezultatai panaudojant failą, kur elementai yra 100 simbolių ilgumo:
+6. Lavinos efektas. Panaudojant penktą funkciją, gauname failo pasirinkimą kurio elementus hash'uos ir palygins poromis.
+
+Naudota:
+   + similar_100.txt - failas sugeneruotas naudojant mt19937, sudaro 100'000 porų kurios yra 100 simbolių ilgumo ir skiriasi vienu simboliu.
+
+Rezultatai:
 
 <img width="381" height="232" alt="image" src="https://github.com/user-attachments/assets/70c8d946-656c-4f65-b710-3009c16b7cdc" />
 
