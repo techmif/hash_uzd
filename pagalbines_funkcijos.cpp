@@ -14,7 +14,6 @@ void nuskaitytimp3(vector<int> &nuskaityti_binary_duomenys){
             if(byte != '\0') nuskaityti_binary_duomenys.push_back((unsigned char)byte); //nors duomenys nuskaitomi binary, kai char irasome i int vektoriu, jis konvertuojamas i desimtaine sistema
             //if (nuskaityti_binary_duomenys.size() % 50000 == 0) cout<<"."; //skaitant ilgesni faila rodys kad vyksta procesas
         }
-        //cout<<endl<<"Nuskaityta sekmingai."<<endl;
     }
     in.close();
 }
@@ -72,7 +71,7 @@ void clearData(string &input, string &hash, string &salt, int &suma, vector<int>
     konvertuota_druskyte.clear();
 }
 
-static string read_first_n_lines(const string &filepath, int n) { //gpt parase patogesne funkcija nei as. Bet as ja modikavau nemazai
+string read_first_n_lines(const string &filepath, int n) { //gpt parase patogesne funkcija nei as. Bet as ja modikavau nemazai
     string lines;
     if (n <= 0) return lines;
     ifstream in(filepath);

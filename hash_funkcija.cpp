@@ -8,6 +8,7 @@ void hashFunkcija(string input, string &hash, string &salt){
     int suma;
 
     salt = druskyte(input);
+    input += salt;
     KonvertCharIx10(input, konvertuota_ivestis);
     KonvertCharIx10(salt, konvertuota_druskyte);
     suma = Sumax10(konvertuota_ivestis);
@@ -28,4 +29,6 @@ void hashFunkcija(string input, string &hash, string &salt){
         hash += desimtaine_i_16(konvertuota_ivestis[i] ^ nuskaityti_binary_duomenys[pradinis_skyrius * (32 + i)] ^ konvertuota_druskyte[i]);
     }
     if(hash.length()>64) hash = hash.substr(0,64);
+    
+    nuskaityti_binary_duomenys.clear();
 }

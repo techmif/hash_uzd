@@ -47,7 +47,7 @@ static inline double stopTimerSec(const timer_point &start) {
 }
 
 
-string desimtaine_i_16(int desimtaine){
+inline string desimtaine_i_16(int desimtaine){
     string hex = "";
     int liekana;
     char simbolis;
@@ -62,7 +62,7 @@ string desimtaine_i_16(int desimtaine){
     return hex;
 }
 
-string druskyte (string input){
+inline string druskyte (string input){
     //generavau sita koda siu ai pagalba. Ideja kodo pasakiau as, tik nelabai mokejau igyvendinti (random skaiciu bibliotekos as nelabai pazistu)
     std::seed_seq seed(input.begin(), input.end());
     std::mt19937 rng(seed);
@@ -75,7 +75,7 @@ string druskyte (string input){
     return result;
 }
 
-void txtfailai(const string &path, vector<string> &fileList){ // Funkcija rasiau praeitam semestre
+inline void txtfailai(const string &path, vector<string> &fileList){ // Funkcija rasiau praeitam semestre
     int i = 0;
     #ifdef _WIN32
     WIN32_FIND_DATAA findFileData;
@@ -118,7 +118,7 @@ void txtfailai(const string &path, vector<string> &fileList){ // Funkcija rasiau
 #endif
 }
 
-string randSgen(string input, int size) { //sugeneruota su ai, nes nesigilinu i random bibliotekas
+inline string randSgen(string input, int size) { //sugeneruota su ai, nes nesigilinu i random bibliotekas
     static string similarStr; // Keeps the "panasus" string between calls
 
     std::random_device rd;

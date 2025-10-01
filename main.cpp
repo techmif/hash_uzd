@@ -1,6 +1,6 @@
 #include "lib.hpp"
 #include "pagalbines_funkcijos.hpp"
-#include "test_functions.cpp"
+#include "test_functions.hpp"
 #include "hash_funkcija.hpp"
 
 int main (){
@@ -42,6 +42,15 @@ int main (){
             testavimas3();
         }
         else return 0;
+        return 0;
+    }
+
+    else if(temp=="4"){
+        input="A";
+        for(int i=0;i<4;i++){
+            hashFunkcija(input,hash,salt);
+            cout<<hash<<endl;
+        }
         return 0;
     }
     else return 0;
