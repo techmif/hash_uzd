@@ -98,7 +98,7 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 # Palyginimas su SHA-256
 My_hash vs SHA-256
 +   Išvestis: 64-bit vs 256-bit.
-+   Apsauga: Ne vs Taip.
++   Saugumas: Ne vs Taip.
 +   Kolizijos atsparumas: Silpnas vs Labai stiprus.
 +   Paprastumas: Paprastas vs Vidutinis.
 +   Greitis: Priklauso nuo įvesties dydžio, su mažesnėm įvestim my_hash daro mažiau veiksmų ir dėl to greitesnis, bet su didesnėm įvestim SHA-256 greit susitapatina ir dar greičiau aplenkia pasitelkiant savo itin dideliu pralaidumu.
