@@ -29,6 +29,9 @@ Blokų grandinių technologijų užduotis sukurti hash funkciją.
 3. Paprašiu free ChatGPT hashinimo funkcijos, gavosi "Chaotic Prime Mixer Hash" funkcija, kuri matoma programoje.
 4. Sukūriau funkcijas rankinio arba failo įvesties.
 5. Pradėjau kurti testines funkcijas eksperimentams 🔬.
+6. Testinės funkcijos sukurtos.
+7. Palyginau savo hash'a su SHA-256.
+8. Palyginau savo hash'a su kursioko hash'u.
 
 # Eksperimentai
 
